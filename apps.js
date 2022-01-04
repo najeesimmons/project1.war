@@ -54,9 +54,6 @@ let playingCards = [
     {suit: "spades", value: 13},
     {suit: "spades", value: 14},
 ]
-// array contatining each card and its value as a object
-//console.log(Object.keys(playingCards).length)
-//length of playingCards is printing to the console
 
 let p1Hand = [];
 let p1FaceUpPile = [];
@@ -69,7 +66,7 @@ let p2TotalCards = p2Hand.length + p2FaceUpPile.length;
 let p2CurrentPlayedCard = {};
 
 let winner = ''
-let restartButton = document.getElementsByClassName('restartButton')
+let startButton = document.getElementsByClassName('startButton').addEventListener('click', playCards)
 // can't seem to figure out how to add event listener
 
 
@@ -132,6 +129,3 @@ function continuePlay() {
 }
 
 playCards()
-console.log(p1CurrentPlayedCard, p2CurrentPlayedCard)
-console.log(p1FaceUpPile)
-console.log(p2FaceUpPile)
