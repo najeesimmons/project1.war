@@ -66,7 +66,8 @@ let p2TotalCards = p2Hand.length + p2FaceUpPile.length;
 let p2CurrentPlayedCard = {};
 
 let winner = ''
-let startButton = document.getElementsByClassName('startButton').addEventListener('click', playCards)
+let startButton = document.getElementById('startButton')
+startButton.addEventListener('click', playCards)
 // can't seem to figure out how to add event listener
 
 
@@ -128,4 +129,3 @@ function continuePlay() {
     //console.log('The game is still on!')
 }
 
-playCards()
