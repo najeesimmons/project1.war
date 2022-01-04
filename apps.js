@@ -75,11 +75,25 @@ startButton.addEventListener('click', playCards)
 /*----- event listeners -----*/
 /*----- functions -----*/
 
+
+function dealCards() {
+    while (p1Hand.length < 26) {
+        let p1randomNumber = Math.floor(Math.random()* 52)
+        p1CurrentPlayedCard = playingCards[p1randomNumber]
+        p1Hand.push(p1CurrentPlayedCard)
+    } 
+    while (p2Hand.length < 26) {
+        let p2randomNumber = Math.floor(Math.random()* 52)
+        p2CurrentPlayedCard = playingCards[p2randomNumber]
+        p2Hand.push(p2CurrentPlayedCard)
+    }
+}
+dealCards()
+console.log(p1Hand)
+console.log(playingCards)
+
+
 function playCards() {
-    let p1randomNumber = Math.floor(Math.random()* 52)
-    let p2randomNumber = Math.floor(Math.random()* 52)
-    p1CurrentPlayedCard = playingCards[p1randomNumber] 
-    p2CurrentPlayedCard = playingCards[p2randomNumber]
     compareCards()
 }
 // at this time playCards initiates all other functions and gameplay
@@ -87,7 +101,6 @@ function playCards() {
 //for p1 and p2
 
 function compareCards() {
-    checkForWin()
     if (p1CurrentPlayedCard.value > p2CurrentPlayedCard.value) {
         p1FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
         console.log("Player 1 took this round!");
@@ -95,11 +108,11 @@ function compareCards() {
     } else if (p2CurrentPlayedCard.value > p1CurrentPlayedCard.value) {
         p2FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
         console.log("Player 2 took this round!");
-    } else {
+    } else if (p1CurrentPlayedCard.value = p2CurrentPlayedCard.value)
         goToWar()
-    }
+        checkForWin()
+        console.log(p1FaceUpPile, p2FaceUpPile)
 }
-// compareCards is not yet pushing the 'losing' item into the specified array;
 
 function goToWar() {
     console.log('This is war baby!')
@@ -110,7 +123,7 @@ function checkForWin() {
     if (p1TotalCards === 52) {
         winner = "Player 1"
         gameOver()
-    } if (p2TotalCards === 52) {
+    } else if (p2TotalCards === 52) {
         winner = "Player 2"
         gameOver()
          } else {
