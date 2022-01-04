@@ -4,7 +4,7 @@ let playingCards = [
     {suit: "hearts", value: 2},
     {suit: "hearts", value: 3},
     {suit: "hearts", value: 4},
-    {suit: "hearts", value: 4},
+    {suit: "hearts", value: 5},
     {suit: "hearts", value: 6},
     {suit: "hearts", value: 7},
     {suit: "hearts", value: 8},
@@ -17,7 +17,7 @@ let playingCards = [
     {suit: "diamonds", value: 2},
     {suit: "diamonds", value: 3},
     {suit: "diamonds", value: 4},
-    {suit: "diamonds", value: 4},
+    {suit: "diamonds", value: 5},
     {suit: "diamonds", value: 6},
     {suit: "diamonds", value: 7},
     {suit: "diamonds", value: 8},
@@ -30,7 +30,7 @@ let playingCards = [
     {suit: "clubs", value: 2},
     {suit: "clubs", value: 3},
     {suit: "clubs", value: 4},
-    {suit: "clubs", value: 4},
+    {suit: "clubs", value: 5},
     {suit: "clubs", value: 6},
     {suit: "clubs", value: 7},
     {suit: "clubs", value: 8},
@@ -43,7 +43,7 @@ let playingCards = [
     {suit: "spades", value: 2},
     {suit: "spades", value: 3},
     {suit: "spades", value: 4},
-    {suit: "spades", value: 4},
+    {suit: "spades", value: 5},
     {suit: "spades", value: 6},
     {suit: "spades", value: 7},
     {suit: "spades", value: 8},
@@ -57,61 +57,72 @@ let playingCards = [
 
 let p1Hand = [];
 let p1FaceUpPile = [];
-let p1TotalCards = p1Hand.length + p1FaceUpPile.length;
 let p1CurrentPlayedCard = {};
+
 
 let p2Hand = [];
 let p2FaceUpPile = [];
-let p2TotalCards = p2Hand.length + p2FaceUpPile.length;
 let p2CurrentPlayedCard = {};
 
 let winner = ''
-let startButton = document.getElementById('startButton')
-startButton.addEventListener('click', playCards)
-// can't seem to figure out how to add event listener
+let dealButton = document.getElementById('deal')
+let playCard = document.getElementById('playCard')
+
 
 
 /*----- cached element references -----*/
 /*----- event listeners -----*/
+dealButton.addEventListener('click', dealCards)
+playCard.addEventListener('click', compareCards)
+
 /*----- functions -----*/
 
 
 function dealCards() {
     while (p1Hand.length < 26) {
-        let p1randomNumber = Math.floor(Math.random()* 52)
-        p1CurrentPlayedCard = playingCards[p1randomNumber]
-        p1Hand.push(p1CurrentPlayedCard)
+        let c = Math.floor(Math.random()* playingCards.length)
+        p1Hand.push(playingCards[c])
     } 
     while (p2Hand.length < 26) {
-        let p2randomNumber = Math.floor(Math.random()* 52)
-        p2CurrentPlayedCard = playingCards[p2randomNumber]
-        p2Hand.push(p2CurrentPlayedCard)
+        let d = Math.floor(Math.random()* playingCards.length)
+        p2Hand.push(playingCards[d])
     }
 }
-dealCards()
-console.log(p1Hand)
-console.log(playingCards)
 
-
-function playCards() {
-    compareCards()
-}
-// at this time playCards initiates all other functions and gameplay
 // playCards needs condition to handle situation if same card is selected
 //for p1 and p2
 
 function compareCards() {
-    if (p1CurrentPlayedCard.value > p2CurrentPlayedCard.value) {
+    let e = Math.floor(Math.random()* p1Hand.length)
+    let p1CurrentPlayedCard = p1Hand.splice(e,1)
+    let f = Math.floor(Math.random()* p1Hand.length)
+    let p2CurrentPlayedCard = p2Hand.splice(f,1)
+
+    if (p1CurrentPlayedCard[0].value > p2CurrentPlayedCard[0].value) {
         p1FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
         console.log("Player 1 took this round!");
 
-    } else if (p2CurrentPlayedCard.value > p1CurrentPlayedCard.value) {
+    } else if (p2CurrentPlayedCard[0].value > p1CurrentPlayedCard[0].value) {
         p2FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
         console.log("Player 2 took this round!");
-    } else if (p1CurrentPlayedCard.value = p2CurrentPlayedCard.value)
+    } else {
         goToWar()
-        checkForWin()
-        console.log(p1FaceUpPile, p2FaceUpPile)
+    } 
+    let p1TotalCards = p1Hand.length + p1FaceUpPile.length;
+    let p2TotalCards = p2Hand.length + p2FaceUpPile.length;
+        checkForWin(p1TotalCards, p2TotalCards)
+    console.log(p1Hand.length, p1FaceUpPile.length, p1TotalCards)
+}
+
+function refillHand(h) {
+    // let g = p1FaceUpPile.length;
+    if (p1Hand.length === 0) {
+        p1Hand = p1FaceUpPile;
+        p1FaceUpPile = []
+    } else if (p2Hand.length === 0) {
+        p2Hand = p1FaceUpPile;
+        p2FaceUpPile = []
+    }
 }
 
 function goToWar() {
@@ -119,15 +130,16 @@ function goToWar() {
 }
 // need to add the actual war protocol to this function
 
-function checkForWin() {
-    if (p1TotalCards === 52) {
+function checkForWin(p1, p2) {
+    if (p1 === 52) {
         winner = "Player 1"
         gameOver()
-    } else if (p2TotalCards === 52) {
+    } else if (p2 === 52) {
         winner = "Player 2"
         gameOver()
          } else {
              continuePlay()
+             // this needs to get us back to a new round.
          }
 }
 
@@ -136,9 +148,7 @@ function gameOver() {
     gameOver.textContent = `The War is over, $winner is victourious!`
 }
 
-// need to add protocol to move property of currentlyPlayedCard into FaceUpPile
-
 function continuePlay() {
-    //console.log('The game is still on!')
+    console.log('The game is still on!')
 }
 
