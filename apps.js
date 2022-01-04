@@ -58,30 +58,49 @@ let playingCards = [
 //console.log(Object.keys(playingCards).length)
 //length of playingCards is printing to the console
 
-let players = {
-    p1: {
-        p1Hand:[],
-        p1FaceUpPile: [],
-        // p1TotalCards: p1.p1Hand.length + p1.p1FaceUpPile.length,
-        p1CurrentPlayedCard: playingCards[0]
-},
-    p2: {
-        p2Hand: [],
-        p2FaceUpPile:[],
-        // p2TotalCards: p1Hand.length + p1FaceUpPile.length,
-        p2CurrentPlayedCard: playingCards[10]}
-    }
+let p1Hand = [];
+let p1FaceUpPile = [];
+let p1TotalCards = p1Hand.length + p1FaceUpPile.length;
+let p1CurrentPlayedCard = {};
 
-// console.log(players)
-// players variable is printing to console log
+let p2Hand = [];
+let p2FaceUpPile = [];
+let p2TotalCards = p2Hand.length + p2FaceUpPile.length;
+let p2CurrentPlayedCard = {};
 
-let p1TotalCards = players.p1.p1Hand.length + players.p1.p1FaceUpPile.length
-let p2TotalCards = players.p2.p2Hand.length + players.p2.p2FaceUpPile.length
 let winner = ''
 
 /*----- cached element references -----*/
 /*----- event listeners -----*/
 /*----- functions -----*/
+
+function playCards() {
+    let p1randomNumber = Math.floor(Math.random()* 52)
+    let p2randomNumber = Math.floor(Math.random()* 52)
+    p1CurrentPlayedCard = playingCards[p1randomNumber] 
+    p2CurrentPlayedCard = playingCards[p2randomNumber]
+    compareCards()
+}
+playCards()
+// playCards needs condition to handle situation if same card is selected
+//for p1 and p2
+
+function compareCards() {
+    checkForWin()
+    if (p1CurrentPlayedCard.value > p2CurrentPlayedCard.value) {
+        console.log("Player 1 took this round!");
+    } else if (p2CurrentPlayedCard.value > p1CurrentPlayedCard.value) {
+        console.log("Player 2 took this round!");
+    } else {
+        goToWar()
+    }
+}
+// compareCards is not yet pushing the 'losing' item into the specified array;
+
+function goToWar() {
+    console.log('This is war baby!')
+}
+// need to add the actual war protocol to this function
 
 function checkForWin() {
     if (p1TotalCards === 52) {
@@ -94,52 +113,16 @@ function checkForWin() {
              continuePlay()
          }
 }
-// checkforWin is functioning properly
 
 function gameOver() {
     document.getElementsByClassName('gameOver')
     gameOver.textContent = `The War is over, $winner is victourious!`
 }
 
-function compareCards() {
-    if (players.p1.p1CurrentPlayedCard.value > players.p2.p2CurrentPlayedCard.value) {
-        console.log("Player 1 took this round!");
-    } else if (players.p2.p2CurrentPlayedCard.value > players.p1.p1CurrentPlayedCard.value) {
-        console.log("Player 2 took this round!");
-    } else {
-        goToWar()
-    }
-}
-
 // need to add protocol to move property of currentlyPlayedCard into FaceUpPile
-// compareCards is not pushing the 'losing' item into the specified array;
-compareCards()
-
-// console.log(players)
-
-// need to add the actual war protocol to this function
-function goToWar() {
-    console.log('This is war baby!')
-}
-
-function startGame() {
-}
 
 function continuePlay() {
     //console.log('The game is still on!')
 }
 
-function playCards() {
-    // for (let i = 0; i <= Object.keys(playingCards).length; i++) {
-    //     p1CurrentPlayedCard = Math.floor(Math.random()) * 52
-    // }
-    let p1randomNumber = Math.floor(Math.random()* 52)
-    let p2randomNumber = Math.floor(Math.random()* 52)
-    players.p1.p1CurrentPlayedCard = playingCards[p1randomNumber] 
-    players.p2.p2CurrentPlayedCard = playingCards[p2randomNumber]
-}
-playCards()
-
-console.log(players.p1.p1CurrentPlayedCard, players.p2.p2CurrentPlayedCard)
-// playCards needs condition to handle situation if same card is selected
-//for p1 and p2
+console.log(p1CurrentPlayedCard, p2CurrentPlayedCard)
