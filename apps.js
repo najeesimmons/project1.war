@@ -69,6 +69,9 @@ let p2TotalCards = p2Hand.length + p2FaceUpPile.length;
 let p2CurrentPlayedCard = {};
 
 let winner = ''
+let restartButton = document.getElementsByClassName('restartButton')
+// can't seem to figure out how to add event listener
+
 
 /*----- cached element references -----*/
 /*----- event listeners -----*/
@@ -81,15 +84,18 @@ function playCards() {
     p2CurrentPlayedCard = playingCards[p2randomNumber]
     compareCards()
 }
-playCards()
+// at this time playCards initiates all other functions and gameplay
 // playCards needs condition to handle situation if same card is selected
 //for p1 and p2
 
 function compareCards() {
     checkForWin()
     if (p1CurrentPlayedCard.value > p2CurrentPlayedCard.value) {
+        p1FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
         console.log("Player 1 took this round!");
+
     } else if (p2CurrentPlayedCard.value > p1CurrentPlayedCard.value) {
+        p2FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
         console.log("Player 2 took this round!");
     } else {
         goToWar()
@@ -125,4 +131,7 @@ function continuePlay() {
     //console.log('The game is still on!')
 }
 
+playCards()
 console.log(p1CurrentPlayedCard, p2CurrentPlayedCard)
+console.log(p1FaceUpPile)
+console.log(p2FaceUpPile)
