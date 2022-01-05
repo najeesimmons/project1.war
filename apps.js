@@ -58,11 +58,13 @@ let playingCards = [
 let p1Hand = [];
 let p1Pile = [];
 let p1PlayedCard = {};
+let warCards = [];
 
 
 let p2Hand = [];
 let p2Pile = [];
 let p2PlayedCard = {};
+let players = ["player 1", "player 2"]
 
 let winner = ''
 let dealButton = document.getElementById('deal')
@@ -91,13 +93,10 @@ function dealCards() {
     }
     // console.log(p1Hand, p2Hand)
 }
-// now using splice to remove items from playingCards after 
-// they are 'dealt' into either player hand - however I'm 
-// not sure that by the time it gets to p2's while loop, 
-// playingCards has 26 items or 52 items.
 
 function compareCards() {
     pickCards()
+    // console.log(p1PlayedCard, p2PlayedCard)
     if (p1PlayedCard.value > p2PlayedCard.value) {
         p1Pile.push(p1PlayedCard)
         p1Pile.push(p2PlayedCard)
@@ -113,25 +112,68 @@ function compareCards() {
     let p2TotalCards = p2Hand.length + p2Pile.length;
         checkForWin(p1TotalCards, p2TotalCards)
         refillHand()
-    console.log(p1Hand.length, p2Hand.length) 
+        console.log(
+            `player1 Cards: ${p1TotalCards}`,
+            `player2 Cards: ${p2TotalCards}`)   
 }
-    
+
 function pickCards() {
     p1PlayedCard = p1Hand[0]
     p1Hand.splice(0,1)
     p2PlayedCard = p2Hand[0]
     p2Hand.splice(0,1)
-    console.log(p1PlayedCard, p2PlayedCard)
 }
 
 function goToWar() {
     console.log('This is war baby!')
-    // for (let i = 0; i < 4; i++) {
-    //     pickCards()
-    // }
+    let x = Math.floor(Math.random * players.length)
+    if (x === 1) {
+        console.log('This one goes to player 1!')
+        p1Pile.push(p1PlayedCard)
+        p1Pile.push(p2PlayedCard)
+        console.log(p1PlayedCard, p2PlayedCard)
+        console.log(p1Pile, p2Pile)
+    } else {
+        console.log('This one goes to player 2!')
+        p2Pile.push(p1PlayedCard)
+        p2Pile.push(p2PlayedCard)
+        console.log(p1PlayedCard, p2PlayedCard)
+    console.log(p1Pile, p2Pile)
+    }
+    console.log(p1Pile, p2Pile)
 }
-// goToWar needs to have a protocol for drawing four cards and
-// 'playing' the fourth card. 
+// goToWar stretchVersion
+// function goToWar() {
+//     console.log('This is war baby!')
+//     console.log(p1PlayedCard, p2PlayedCard)
+//     warCards.push(p1PlayedCard)
+//     warCards.push(p2PlayedCard)
+//     console.log(warCards)
+//     for (let i = 0; i < 2; i++) {
+//         warCards.push(p1Hand[i])
+//         warCards.push(p2Hand[i])
+//         p1Hand.splice(0,i)
+//         p2Hand.splice(0,i)
+//         }
+//         console.log(warCards)
+//         pickCards()
+//         console.log(p1PlayedCard, p2PlayedCard)
+//         if (p1PlayedCard.value > p2PlayedCard.value) {
+//             warCards.push(p1PlayedCard)
+//             warCards.push(p2PlayedCard)
+//             p1Pile.push(warCards[0], warCards[1], warCards[2], warCards[3], warCards[4])
+//             warCards.splice(0, warCards.length)
+//             console.log("Player 1 took the war!");
+//         } else if (p2PlayedCard.value > p1PlayedCard.value) {
+//             warCards.push(p1PlayedCard)
+//             warCards.push(p2PlayedCard)
+//             p2Pile.push(warCards[0], warCards[1], warCards[2], warCards[3], warCards[4])
+//             warCards.splice(0, warCards.length)
+//             console.log("Player 1 took the war!");
+//     }
+//     console.log(warCards)
+// } 
+// goToWar (stretch version) is pulling empty arrays into warCards
 
 function refillHand() {
     if (p1Hand.length === 0 || p2Hand.length === 0) {
@@ -140,9 +182,7 @@ function refillHand() {
         p2Hand = p2Pile;
         p2Pile = []
     } 
-    // console.log(p2Hand)
 }
-// refill isn't refilling p2Hand when it gets down to 0
 
 function checkForWin(p1, p2) {
     if (p1 === 52) {
@@ -162,4 +202,3 @@ function gameOver() {
 function continuePlay() {
     console.log('The game is still on!')
 }
-
