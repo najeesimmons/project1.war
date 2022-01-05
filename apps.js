@@ -113,7 +113,7 @@ function compareCards() {
     let p2TotalCards = p2Hand.length + p2Pile.length;
         checkForWin(p1TotalCards, p2TotalCards)
         refillHand()
-    console.log(p1Hand.length, p1Pile.length, p1TotalCards) 
+    console.log(p1Hand.length, p2Hand.length) 
 }
     
 function pickCards() {
@@ -121,41 +121,37 @@ function pickCards() {
     p1Hand.splice(0,1)
     p2PlayedCard = p2Hand[0]
     p2Hand.splice(0,1)
-    // console.log(p1PlayedCard, p2PlayedCard)
+    console.log(p1PlayedCard, p2PlayedCard)
 }
-// console log at this point shows hand array decreasing but 
-// pile array doesn't increase
 
 function goToWar() {
     console.log('This is war baby!')
     // for (let i = 0; i < 4; i++) {
-    //     pickCards
+    //     pickCards()
     // }
-    //     compareCards
 }
-// working on war protocol/function
+// goToWar needs to have a protocol for drawing four cards and
+// 'playing' the fourth card. 
 
 function refillHand() {
-    if (p1Hand.length === 0) {
+    if (p1Hand.length === 0 || p2Hand.length === 0) {
         p1Hand = p1Pile;
         p1Pile = []
-    } else if (p2Hand.length === 0) {
-        p2Hand = p1Pile;
+        p2Hand = p2Pile;
         p2Pile = []
     } 
+    // console.log(p2Hand)
 }
+// refill isn't refilling p2Hand when it gets down to 0
 
 function checkForWin(p1, p2) {
     if (p1 === 52) {
         winner = "Player 1"
         gameOver()
-    } else if (p2 === 52) {
+    } if (p2 === 52) {
         winner = "Player 2"
         gameOver()
-         } else {
-             continuePlay()
-             // this needs to get us back to a new round.
-         }
+         } 
 }
 
 function gameOver() {
