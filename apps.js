@@ -57,12 +57,12 @@ let playingCards = [
 
 let p1Hand = [];
 let p1Pile = [];
-let p1CurrentPlayedCard = {};
+let p1PlayedCard = {};
 
 
 let p2Hand = [];
 let p2Pile = [];
-let p2CurrentPlayedCard = {};
+let p2PlayedCard = {};
 
 let winner = ''
 let dealButton = document.getElementById('deal')
@@ -82,30 +82,29 @@ function dealCards() {
     while (p1Hand.length < 26) {
         let c = Math.floor(Math.random()* playingCards.length)
         p1Hand.push(playingCards[c])
+        playingCards.splice(c,1)
     } 
     while (p2Hand.length < 26) {
         let d = Math.floor(Math.random()* playingCards.length)
         p2Hand.push(playingCards[d])
+        playingCards.splice(d,1)
     }
+    // console.log(p1Hand, p2Hand)
 }
-
-// playCards needs condition to handle situation if same card is selected
-//for p1 and p2
+// now using splice to remove items from playingCards after 
+// they are 'dealt' into either player hand - however I'm 
+// not sure that by the time it gets to p2's while loop, 
+// playingCards has 26 items or 52 items.
 
 function compareCards() {
-    let e = Math.floor(Math.random()* p1Hand.length)
-    let p1CurrentPlayedCard = p1Hand[e]
-    p1Hand.shift(p1Hand[e])
-    let f = Math.floor(Math.random()* p1Hand.length)
-    let p2CurrentPlayedCard = p2Hand[f]
-    p2Hand.shift(p1Hand[f])
-    if (p1CurrentPlayedCard.value > p2CurrentPlayedCard.value) {
-        p1Pile.push(p1CurrentPlayedCard)
-        p1Pile.push(p2CurrentPlayedCard)
+    pickCards()
+    if (p1PlayedCard.value > p2PlayedCard.value) {
+        p1Pile.push(p1PlayedCard)
+        p1Pile.push(p2PlayedCard)
         console.log("Player 1 took this round!");
-    } else if (p2CurrentPlayedCard.value > p1CurrentPlayedCard.value) {
-        p2Pile.push(p1CurrentPlayedCard)
-        p2Pile.push(p2CurrentPlayedCard)
+    } else if (p2PlayedCard.value > p1PlayedCard.value) {
+        p2Pile.push(p1PlayedCard)
+        p2Pile.push(p2PlayedCard)
         console.log("Player 2 took this round!");
     } else {
         goToWar()
@@ -114,25 +113,37 @@ function compareCards() {
     let p2TotalCards = p2Hand.length + p2Pile.length;
         checkForWin(p1TotalCards, p2TotalCards)
         refillHand()
-    console.log(p1Hand.length, p1Pile.length, p1TotalCards)
+    console.log(p1Hand.length, p1Pile.length, p1TotalCards) 
 }
+    
+function pickCards() {
+    p1PlayedCard = p1Hand[0]
+    p1Hand.splice(0,1)
+    p2PlayedCard = p2Hand[0]
+    p2Hand.splice(0,1)
+    // console.log(p1PlayedCard, p2PlayedCard)
+}
+// console log at this point shows hand array decreasing but 
+// pile array doesn't increase
+
+function goToWar() {
+    console.log('This is war baby!')
+    // for (let i = 0; i < 4; i++) {
+    //     pickCards
+    // }
+    //     compareCards
+}
+// working on war protocol/function
 
 function refillHand() {
     if (p1Hand.length === 0) {
-        console.log(p1Hand)
         p1Hand = p1Pile;
         p1Pile = []
-        console.log(p1Hand)
     } else if (p2Hand.length === 0) {
         p2Hand = p1Pile;
         p2Pile = []
     } 
 }
-
-function goToWar() {
-    console.log('This is war baby!')
-}
-// need to add the actual war protocol to this function
 
 function checkForWin(p1, p2) {
     if (p1 === 52) {
