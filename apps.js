@@ -56,12 +56,12 @@ let playingCards = [
 ]
 
 let p1Hand = [];
-let p1FaceUpPile = [];
+let p1Pile = [];
 let p1CurrentPlayedCard = {};
 
 
 let p2Hand = [];
-let p2FaceUpPile = [];
+let p2Pile = [];
 let p2CurrentPlayedCard = {};
 
 let winner = ''
@@ -94,35 +94,39 @@ function dealCards() {
 
 function compareCards() {
     let e = Math.floor(Math.random()* p1Hand.length)
-    let p1CurrentPlayedCard = p1Hand.splice(e,1)
+    let p1CurrentPlayedCard = p1Hand[e]
+    p1Hand.shift(p1Hand[e])
     let f = Math.floor(Math.random()* p1Hand.length)
-    let p2CurrentPlayedCard = p2Hand.splice(f,1)
-
-    if (p1CurrentPlayedCard[0].value > p2CurrentPlayedCard[0].value) {
-        p1FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
+    let p2CurrentPlayedCard = p2Hand[f]
+    p2Hand.shift(p1Hand[f])
+    if (p1CurrentPlayedCard.value > p2CurrentPlayedCard.value) {
+        p1Pile.push(p1CurrentPlayedCard)
+        p1Pile.push(p2CurrentPlayedCard)
         console.log("Player 1 took this round!");
-
-    } else if (p2CurrentPlayedCard[0].value > p1CurrentPlayedCard[0].value) {
-        p2FaceUpPile.push(p1CurrentPlayedCard, p2CurrentPlayedCard)
+    } else if (p2CurrentPlayedCard.value > p1CurrentPlayedCard.value) {
+        p2Pile.push(p1CurrentPlayedCard)
+        p2Pile.push(p2CurrentPlayedCard)
         console.log("Player 2 took this round!");
     } else {
         goToWar()
     } 
-    let p1TotalCards = p1Hand.length + p1FaceUpPile.length;
-    let p2TotalCards = p2Hand.length + p2FaceUpPile.length;
+    let p1TotalCards = p1Hand.length + p1Pile.length;
+    let p2TotalCards = p2Hand.length + p2Pile.length;
         checkForWin(p1TotalCards, p2TotalCards)
-    console.log(p1Hand.length, p1FaceUpPile.length, p1TotalCards)
+        refillHand()
+    console.log(p1Hand.length, p1Pile.length, p1TotalCards)
 }
 
-function refillHand(h) {
-    // let g = p1FaceUpPile.length;
+function refillHand() {
     if (p1Hand.length === 0) {
-        p1Hand = p1FaceUpPile;
-        p1FaceUpPile = []
+        console.log(p1Hand)
+        p1Hand = p1Pile;
+        p1Pile = []
+        console.log(p1Hand)
     } else if (p2Hand.length === 0) {
-        p2Hand = p1FaceUpPile;
-        p2FaceUpPile = []
-    }
+        p2Hand = p1Pile;
+        p2Pile = []
+    } 
 }
 
 function goToWar() {
