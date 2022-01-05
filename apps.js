@@ -58,14 +58,13 @@ let playingCards = [
 let p1Hand = [];
 let p1Pile = [];
 let p1PlayedCard = {};
-let warCards = [];
-
 
 let p2Hand = [];
 let p2Pile = [];
 let p2PlayedCard = {};
-let players = ["player 1", "player 2"]
+let players = ['player 1', 'player 2']
 
+let warCards = [];
 let winner = ''
 let dealButton = document.getElementById('deal')
 let playCard = document.getElementById('playCard')
@@ -91,12 +90,11 @@ function dealCards() {
         p2Hand.push(playingCards[d])
         playingCards.splice(d,1)
     }
-    // console.log(p1Hand, p2Hand)
 }
 
 function compareCards() {
     pickCards()
-    // console.log(p1PlayedCard, p2PlayedCard)
+    console.log (p1PlayedCard, p2PlayedCard)
     if (p1PlayedCard.value > p2PlayedCard.value) {
         p1Pile.push(p1PlayedCard)
         p1Pile.push(p2PlayedCard)
@@ -108,13 +106,15 @@ function compareCards() {
     } else {
         goToWar()
     } 
-    let p1TotalCards = p1Hand.length + p1Pile.length;
-    let p2TotalCards = p2Hand.length + p2Pile.length;
-        checkForWin(p1TotalCards, p2TotalCards)
-        refillHand()
-        console.log(
-            `player1 Cards: ${p1TotalCards}`,
-            `player2 Cards: ${p2TotalCards}`)   
+    console.log(p1Pile, p2Pile)
+    // let p1TotalCards = p1Hand.length + p1Pile.length;
+    // let p2TotalCards = p2Hand.length + p2Pile.length;
+    /* totalCards was used to check math and for a win condition
+       which has been changed */
+
+        checkForWin()
+        /* refillHand() stretch feature (below) will transfer player pile 
+        to hand (if pile.length > 0) when hand reaches zero */
 }
 
 function pickCards() {
@@ -138,9 +138,7 @@ function goToWar() {
         p2Pile.push(p1PlayedCard)
         p2Pile.push(p2PlayedCard)
         console.log(p1PlayedCard, p2PlayedCard)
-    console.log(p1Pile, p2Pile)
     }
-    console.log(p1Pile, p2Pile)
 }
 // goToWar stretchVersion
 // function goToWar() {
@@ -175,28 +173,30 @@ function goToWar() {
 // } 
 // goToWar (stretch version) is pulling empty arrays into warCards
 
-function refillHand() {
-    if (p1Hand.length === 0 || p2Hand.length === 0) {
-        p1Hand = p1Pile;
-        p1Pile = []
-        p2Hand = p2Pile;
-        p2Pile = []
-    } 
-}
+// function refillHand() {
+//     if (p1Hand.length === 0 || p2Hand.length === 0) {
+//         p1Hand = p1Pile;
+//         p1Pile = []
+//         p2Hand = p2Pile;
+//         p2Pile = []
+//     } 
+// }
 
-function checkForWin(p1, p2) {
-    if (p1 === 52) {
+function checkForWin() {
+    console.log(p1Hand.length, p2Hand.length)
+    if (p2Hand.length === 0) {
         winner = "Player 1"
         gameOver()
-    } if (p2 === 52) {
+    } else if (p1Hand.length === 0) {
         winner = "Player 2"
         gameOver()
-         } 
+         }
 }
 
 function gameOver() {
     document.getElementsByClassName('gameOver')
     gameOver.textContent = `The War is over, $winner is victourious!`
+    playCard.removeEventListener('click', compareCards)
 }
 
 function continuePlay() {
