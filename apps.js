@@ -120,7 +120,7 @@ function pickCards() {
 // beginning of stretch version of goToWar below
 function goToWar() {
     console.log('This is war baby!')
-    let x = Math.floor(Math.random * players.length)
+    let x = Math.floor(Math.random() * players.length)
     if (x === 1) {
         console.log('This one goes to player 1!')
         p1Pile.push(p1Card)
@@ -132,6 +132,7 @@ function goToWar() {
         p2Pile.push(p2Card)
     }
 }
+// This seems to never return player '1' as the war winner should there be a plus 1?
 
 function checkForWin () {
     if (p1Hand.length === 0 && p2Hand.length === 0 && p1Pile.length > p2Pile.length) {
