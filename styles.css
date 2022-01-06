@@ -8,9 +8,11 @@ h1 {
     text-align: center;
 }
 .gameBoard {
-    margin: auto;
-    display: grid;
-    grid-template-columns: 50% 25% 25%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* grid-template-rows:[row1-start] 25% [row1-end] 100px [third-line] auto [last-line]; */
     background-color: #1b1c1b;
     height: 600px;
     width: 700px;
@@ -19,11 +21,17 @@ h1 {
     border-width: 10px;
     /* border-color:; */
 }
-
+.divContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px
+}
 .allCards {
-    height: 25px;
-    width: 25px;
+    height: 150px;
+    width: 100px;
     background-color: white;
+    border-style: groove;
+    margin: 10px
 }
 
 .allButtons {
