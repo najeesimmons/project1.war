@@ -11,15 +11,13 @@
 <body>
    <h1>Let's Play War!</h1>
    <div class='gameBoard'>
-       <div class='player1Hand'></div>
-       <div class='player1CurrentCard'></div>
-       <div class='player1discardPile'></div>
-       <div class='player2Hand'></div>
-       <div class='player2CurrentCard'></div>
-       <div class='player2discardPile'></div>
+       <div id='p1Pile' class='allCards'></div>
+       <div id='p1Card' class='allCards'></div>
+       <div id='p2Pile' class='allCards'></div>
+       <div id='p2Card' class='allCards'></div>  
    </div>
-   <p class='gameOver'></p> 
-   <button id='deal'>Deal!</button>
-   <button id='playCard'>Play Your Card</button>
+   <div class='gameOver'></div> 
+   <button id='deal' class='allButtons'>Deal!</button>
+   <button id='playCard' class='allButtons'>Play Your Card</button>
 </body>
 </html>

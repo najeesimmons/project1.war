@@ -57,11 +57,11 @@ let playingCards = [
 
 let p1Hand = [];
 let p1Pile = [];
-let p1PlayedCard = {};
+let p1Card = {};
 
 let p2Hand = [];
 let p2Pile = [];
-let p2PlayedCard = {};
+let p2Card = {};
 let players = ['player 1', 'player 2']
 
 let warCards = [];
@@ -72,6 +72,7 @@ let playCard = document.getElementById('playCard')
 
 
 /*----- cached element references -----*/
+
 /*----- event listeners -----*/
 dealButton.addEventListener('click', dealCards)
 playCard.addEventListener('click', compareCards)
@@ -94,53 +95,83 @@ function dealCards() {
 
 function compareCards() {
     pickCards()
-    console.log (p1PlayedCard, p2PlayedCard)
-    if (p1PlayedCard.value > p2PlayedCard.value) {
-        p1Pile.push(p1PlayedCard)
-        p1Pile.push(p2PlayedCard)
+    if (p1Card.value > p2Card.value) {
+        p1Pile.push(p1Card)
+        p1Pile.push(p2Card)
         console.log("Player 1 took this round!");
-    } else if (p2PlayedCard.value > p1PlayedCard.value) {
-        p2Pile.push(p1PlayedCard)
-        p2Pile.push(p2PlayedCard)
+    } else if (p2Card.value > p1Card.value) {
+        p2Pile.push(p1Card)
+        p2Pile.push(p2Card)
         console.log("Player 2 took this round!");
     } else {
         goToWar()
     } 
-    console.log(p1Pile, p2Pile)
-    // let p1TotalCards = p1Hand.length + p1Pile.length;
-    // let p2TotalCards = p2Hand.length + p2Pile.length;
-    /* totalCards was used to check math and for a win condition
-       which has been changed */
-
         checkForWin()
-        /* refillHand() stretch feature (below) will transfer player pile 
-        to hand (if pile.length > 0) when hand reaches zero */
 }
 
 function pickCards() {
-    p1PlayedCard = p1Hand[0]
+    p1Card = p1Hand[0]
     p1Hand.splice(0,1)
-    p2PlayedCard = p2Hand[0]
+    p2Card = p2Hand[0]
     p2Hand.splice(0,1)
 }
 
+// beginning of stretch version of goToWar below
 function goToWar() {
     console.log('This is war baby!')
     let x = Math.floor(Math.random * players.length)
     if (x === 1) {
         console.log('This one goes to player 1!')
-        p1Pile.push(p1PlayedCard)
-        p1Pile.push(p2PlayedCard)
-        console.log(p1PlayedCard, p2PlayedCard)
+        p1Pile.push(p1Card)
+        p1Pile.push(p2Card)
         console.log(p1Pile, p2Pile)
     } else {
         console.log('This one goes to player 2!')
-        p2Pile.push(p1PlayedCard)
-        p2Pile.push(p2PlayedCard)
-        console.log(p1PlayedCard, p2PlayedCard)
+        p2Pile.push(p1Card)
+        p2Pile.push(p2Card)
     }
 }
-// goToWar stretchVersion
+
+function checkForWin () {
+    if (p1Hand.length === 0 && p2Hand.length === 0 && p1Pile.length > p2Pile.length) {
+        winner = 'Player 1'
+        console.log('Player 1 wins the war!')
+        gameOver()
+    } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length > p1Pile.length) {
+        winner = 'Player 2'
+        console.log('Player 2 wins the war!')
+        gameOver()
+    }
+    console.log(p1Pile, p2Pile)
+}
+
+function gameOver() {
+    document.getElementsByClassName('gameOver')
+    gameOver.textContent = `The War is over, $winner is victourious!`
+    playCard.removeEventListener('click', compareCards)
+}
+
+// ****************************************************************************************************
+// stretch features will include:
+
+// 1. a 'refill' function which will take the cards in a players pile and move it to his hand when
+// when the hand reaches zero so that play may continue
+
+// 2. refactoring of 'checkForWin' which will evaluate whether total cards (hand + pile === 52.)
+// this will be the new win condition 
+
+// 3. refactoring 'goToWar' -- this version will store both played cards in a new, temporary 
+// array 'warCards', draw three more cards from each hand, placing them in the same array, then finally,
+// drawing a last card from each hand which will be evaluated for highest value. The player
+// to whom the highest value card of this matchup belongs will get all cards in the array, 
+// pushed into his pile, as well as both cards currenly being played (all elements of 'warCards' 
+// will simultaneously need to be spliced out).
+
+// 4. ability to deal a new game without refreshing page
+
+// ****************************************************************************************************
+// GOTOWAR (Stretch Version)
+
 // function goToWar() {
 //     console.log('This is war baby!')
 //     console.log(p1PlayedCard, p2PlayedCard)
@@ -171,7 +202,9 @@ function goToWar() {
 //     }
 //     console.log(warCards)
 // } 
-// goToWar (stretch version) is pulling empty arrays into warCards
+
+// ****************************************************************************************************
+// REFILL (Stretch Feature)
 
 // function refillHand() {
 //     if (p1Hand.length === 0 || p2Hand.length === 0) {
@@ -181,24 +214,3 @@ function goToWar() {
 //         p2Pile = []
 //     } 
 // }
-
-function checkForWin() {
-    console.log(p1Hand.length, p2Hand.length)
-    if (p2Hand.length === 0) {
-        winner = "Player 1"
-        gameOver()
-    } else if (p1Hand.length === 0) {
-        winner = "Player 2"
-        gameOver()
-         }
-}
-
-function gameOver() {
-    document.getElementsByClassName('gameOver')
-    gameOver.textContent = `The War is over, $winner is victourious!`
-    playCard.removeEventListener('click', compareCards)
-}
-
-function continuePlay() {
-    console.log('The game is still on!')
-}
