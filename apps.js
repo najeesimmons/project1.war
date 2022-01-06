@@ -68,6 +68,7 @@ let warCards = [];
 let winner = ''
 let dealButton = document.getElementById('deal')
 let playCard = document.getElementById('playCard')
+let endMessage = document.getElementsByClassName('gameOver')
 
 
 
@@ -142,12 +143,10 @@ function checkForWin () {
         console.log('Player 2 wins the war!')
         gameOver()
     }
-    console.log(p1Pile, p2Pile)
+    console.log(p1Hand.length, p1Pile.length, p2Hand.length, p2Pile.length);
 }
 
 function gameOver() {
-    document.getElementsByClassName('gameOver')
-    gameOver.textContent = `The War is over, $winner is victourious!`
     playCard.removeEventListener('click', compareCards)
 }
 
