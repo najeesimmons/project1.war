@@ -107,6 +107,7 @@ function dealCards() {
         tempPlayingCards.splice(d,1)
     }
     playCard.addEventListener('click', compareCards)
+    dealButton.removeEventListener('click',dealCards)
 }
 
 function compareCards() {
@@ -211,7 +212,6 @@ function resetGame() {
 
 function gameOver() {
     playCard.removeEventListener('click', compareCards)
-    dealButton.removeEventListener('click',dealCards)
 }
 
 // ****************************************************************************************************

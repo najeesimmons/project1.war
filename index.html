@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- <style>
+    body {
+        background-image: url("https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5de35e9eea103f000653cd70%2FDetailed-strategy-map-of-the-Korean-peninsula-from-Command--Modern-Naval%2F960x0.jpg%3Ffit%3Dscale");
+        background-repeat: no-repeat;
+    }
+</style> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,31 +15,33 @@
     <title>I Declare War!</title>
 </head>
 <body>
-   <h1>Let's Play War!</h1>
-   <div class='gameBoard'>
-       <div class='divContainer'>
-        <!-- backkofCard and backofCard2 will be appended as children of 
-            divContainer at appropriate time.  -->
-        <div id='p2Pile' class='allCards'>
-            <p class='placeHoldertext'>Enemy Pile</p>
+    <div class='backgroundPic'> 
+        <h1>Let's Play War!</h1>
+        <div class='gameBoard'>
+            <div class='divContainer'>
+                <!-- backkofCard and backofCard2 will be appended as children of 
+                    divContainer at appropriate time.  -->
+                <div id='p2Pile' class='allCards'>
+                    <p class='placeHoldertext'>Enemy Pile</p>
+                </div>
+                <div id='p2Card' class='allCards'>
+                    <p class='placeHoldertext'>Enemy Card</p>
+                </div>
+                <div id='p1Pile' class='allCards'>
+                    <p class='placeHoldertext'>Player Pile</p>
+                </div>
+                <div id='p1Card' class='allCards'>
+                    <p class='placeHoldertext' class='cardValue'>Player Card</p>
+                </div>  
+            </div>
         </div>
-        <div id='p2Card' class='allCards'>
-            <p class='placeHoldertext'>Enemy Card</p>
-        </div>
-        <div id='p1Pile' class='allCards'>
-            <p class='placeHoldertext'>Player Pile</p>
-        </div>
-        <div id='p1Card' class='allCards'>
-            <p class='placeHoldertext' class='cardValue'>Player Card</p>
-        </div>  
-    </div>
-   </div>
-   <div class='gameOver'></div> 
-   <div class='gameButtonHolder'>
-    <button id='deal' class='allButtons'>Deal!</button>
-    <button id='playCard' class='allButtons'>Play Your Card</button>
-    <button id='resetGame' class='allButtons'>Reset Game</button>
-    </div>
+        <div class='gameOver'></div> 
+        <div class='gameButtonHolder'>
+            <button id='deal' class='allButtons'>Deal!</button>
+            <button id='playCard' class='allButtons'>Play Your Card</button>
+            <button id='resetGame' class='allButtons'>Reset Game</button>
+            </div>
+            </div>
     </div>
    </body>
 </html>
