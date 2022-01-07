@@ -40,6 +40,11 @@ h1 {
     margin: 20px;
     font-size: 20px;
 }
+.cardValue {
+    font-size: 30px;
+    
+    text-align: center;
+}
 
 .placeHoldertext {
     text-align: center;
@@ -51,3 +56,9 @@ h1 {
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+.cardBack {
+    height: 700px;
+    width: 500px;
+}
+

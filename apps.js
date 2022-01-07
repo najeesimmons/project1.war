@@ -72,10 +72,12 @@ let playCard = document.getElementById('playCard')
 let resetButton = document.getElementById('resetGame')
 let endMessage = document.getElementsByClassName('gameOver')
 
+let p1CardMarker = document.querySelector('#p1Card p')
+let p2CardMarker = document.querySelector('#p2Card p')
+
 const backOfCard = document.createElement('img')
 backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
-
-
+backOfCard.classList.add('cardBack')
 
 
 /*----- cached element references -----*/
@@ -117,7 +119,6 @@ function compareCards() {
     } else {
         goToWar()
     } 
-        document.querySelector('#p2Pile').appendChild(backOfCard)
         checkForWin()
 }
 
@@ -145,6 +146,10 @@ function pickCards() {
     if (p2Card&& p2Card.suit && p2Card.value) {
         document.querySelector('#p2Card p').innerText=`${renderSymbol(p2Card.suit)} ${p2Card.value}`
     }
+    p1CardMarker.classList.remove('placeHolderText')
+    p1CardMarker.classList.add('cardValue')
+    p2CardMarker.classList.remove('placeHolderText')
+    p2CardMarker.classList.add('cardValue')
 }
 
 // beginning of stretch version of goToWar below
