@@ -72,6 +72,9 @@ let playCard = document.getElementById('playCard')
 let resetButton = document.getElementById('resetGame')
 let endMessage = document.getElementsByClassName('gameOver')
 
+const backOfCard = document.createElement('img')
+backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
+
 
 
 
@@ -114,6 +117,7 @@ function compareCards() {
     } else {
         goToWar()
     } 
+        document.querySelector('#p2Pile').appendChild(backOfCard)
         checkForWin()
 }
 
