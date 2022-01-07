@@ -75,9 +75,13 @@ let endMessage = document.getElementsByClassName('gameOver')
 let p1CardMarker = document.querySelector('#p1Card p')
 let p2CardMarker = document.querySelector('#p2Card p')
 
+// let backOfCard = document.createElement('img')
+// backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
+// backOfCard.classList.add('cardBack')
+
 let backOfCard2 = document.createElement('img')
 backOfCard2.src = 'https://i.imgur.com/38pBbZN.png'
-backOfCard2.classList.add('cardBack')
+backOfCard2.classList.add('cardBack2')
 
 /*----- cached element references -----*/
 
@@ -152,6 +156,7 @@ function pickCards() {
     p1CardMarker.classList.add('cardValue')
     p2CardMarker.classList.remove('placeHolderText')
     p2CardMarker.classList.add('cardValue')
+    // document.querySelector('.divContainer').appendChild(backOfCard)
     document.querySelector('.divContainer').appendChild(backOfCard2)
 }
 
