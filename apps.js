@@ -75,10 +75,9 @@ let endMessage = document.getElementsByClassName('gameOver')
 let p1CardMarker = document.querySelector('#p1Card p')
 let p2CardMarker = document.querySelector('#p2Card p')
 
-const backOfCard = document.createElement('img')
+let backOfCard = document.createElement('img')
 backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
 backOfCard.classList.add('cardBack')
-
 
 /*----- cached element references -----*/
 
@@ -119,7 +118,10 @@ function compareCards() {
     } else {
         goToWar()
     } 
+        //add cardbank (which is a class) to div 
         checkForWin()
+        
+        
 }
 
 function renderSymbol(suit) {
@@ -150,6 +152,7 @@ function pickCards() {
     p1CardMarker.classList.add('cardValue')
     p2CardMarker.classList.remove('placeHolderText')
     p2CardMarker.classList.add('cardValue')
+    document.querySelector('#p2Card').appendChild(backOfCard)
 }
 
 // beginning of stretch version of goToWar below
@@ -178,7 +181,7 @@ function checkForWin () {
         console.log('Player 2 wins the war!')
         gameOver()
     } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length === p1Pile.length) {
-        console.log('This is WAR! There are no real winners!')
+        console.log('Sometimes in war...nobody wins.')
         console.log(p1Hand.length, p1Pile.length, p2Hand.length, p2Pile.length);
         gameOver()
     }
@@ -203,6 +206,7 @@ function resetGame() {
 
 function gameOver() {
     playCard.removeEventListener('click', compareCards)
+    dealButton.removeEventListener('click',dealCards)
 }
 
 // ****************************************************************************************************

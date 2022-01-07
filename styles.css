@@ -42,7 +42,6 @@ h1 {
 }
 .cardValue {
     font-size: 30px;
-    
     text-align: center;
 }
 
@@ -58,7 +57,10 @@ h1 {
 }
 
 .cardBack {
-    height: 700px;
-    width: 500px;
+    position: absolute;
+    top: 18.5%;
+    left: 26%;
+    height: 330px;
+    width: 330px;
 }
 
