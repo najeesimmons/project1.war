@@ -55,6 +55,7 @@ let playingCards = [
     {suit: "spades", value: 14},
 ]
 
+let tempPlayingCards = [];
 let p1Hand = [];
 let p1Pile = [];
 let p1Card = {};
@@ -68,6 +69,7 @@ let warCards = [];
 let winner = ''
 let dealButton = document.getElementById('deal')
 let playCard = document.getElementById('playCard')
+let resetButton = document.getElementById('resetGame')
 let endMessage = document.getElementsByClassName('gameOver')
 
 
@@ -78,20 +80,23 @@ let endMessage = document.getElementsByClassName('gameOver')
 /*----- event listeners -----*/
 dealButton.addEventListener('click', dealCards)
 playCard.addEventListener('click', compareCards)
+resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
 
 
 function dealCards() {
+    tempPlayingCards = playingCards
+    console.log(tempPlayingCards, playingCards)
     while (p1Hand.length < 26) {
-        let c = Math.floor(Math.random()* playingCards.length)
-        p1Hand.push(playingCards[c])
-        playingCards.splice(c,1)
+        let c = Math.floor(Math.random()* tempPlayingCards.length)
+        p1Hand.push(tempPlayingCards[c])
+        tempPlayingCards.splice(c,1)
     } 
     while (p2Hand.length < 26) {
-        let d = Math.floor(Math.random()* playingCards.length)
-        p2Hand.push(playingCards[d])
-        playingCards.splice(d,1)
+        let d = Math.floor(Math.random()* tempPlayingCards.length)
+        p2Hand.push(tempPlayingCards[d])
+        tempPlayingCards.splice(d,1)
     }
 }
 
@@ -128,9 +133,13 @@ function pickCards() {
     p1Hand.splice(0,1)
     p2Card = p2Hand[0]
     p2Hand.splice(0,1)
-    document.querySelector('#p1Card p').innerText=`${renderSymbol(p1Card.suit)} ${p1Card.value}`
-    document.querySelector('#p2Card p').innerText=`${renderSymbol(p2Card.suit)} ${p2Card.value}`
-    console.log(p1Card)
+    console.log(p1Hand, p1Card)
+    if (p1Card&& p1Card.suit && p1Card.value) {
+        document.querySelector('#p1Card p').innerText=`${renderSymbol(p1Card.suit)} ${p1Card.value}`
+    } 
+    if (p2Card&& p2Card.suit && p2Card.value) {
+        document.querySelector('#p2Card p').innerText=`${renderSymbol(p2Card.suit)} ${p2Card.value}`
+    }
 }
 
 // beginning of stretch version of goToWar below
@@ -160,6 +169,22 @@ function checkForWin () {
         gameOver()
     }
     console.log(p1Hand.length, p1Pile.length, p2Hand.length, p2Pile.length);
+}
+
+function resetGame() {
+    p1Hand = [];
+    p1Pile = [];
+    p1Card = {};
+
+    p2Hand = [];
+    p2Pile = [];
+    p2Card = {};
+
+    warCards = [];
+    winner = ''
+    tempPlayingCards = []
+
+    playCard.addEventListener('click', compareCards)
 }
 
 function gameOver() {
