@@ -72,6 +72,7 @@ let endMessage = document.getElementsByClassName('gameOver')
 
 
 
+
 /*----- cached element references -----*/
 
 /*----- event listeners -----*/
@@ -110,11 +111,26 @@ function compareCards() {
         checkForWin()
 }
 
+function renderSymbol(suit) {
+    if (suit === 'hearts') {
+        return '♥'
+    } else if (suit === 'diamonds') {
+        return '♦'
+    } else if (suit === 'clubs') {
+        return '♣'
+    } else if (suit === 'spades') {
+        return '♠'
+    }
+}
+
 function pickCards() {
     p1Card = p1Hand[0]
     p1Hand.splice(0,1)
     p2Card = p2Hand[0]
     p2Hand.splice(0,1)
+    document.querySelector('#p1Card p').innerText=`${renderSymbol(p1Card.suit)} ${p1Card.value}`
+    document.querySelector('#p2Card p').innerText=`${renderSymbol(p2Card.suit)} ${p2Card.value}`
+    console.log(p1Card)
 }
 
 // beginning of stretch version of goToWar below
