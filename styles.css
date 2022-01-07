@@ -57,9 +57,11 @@ h1 {
 }
 
 .cardBack {
-    position: absolute;
-    top: 18.5%;
-    left: 26%;
+    position: relative;
+    top: 49.5%;
+    left: 50%;
+    margin-top: -465px;
+    margin-left: -220px;
     height: 330px;
     width: 330px;
 }
