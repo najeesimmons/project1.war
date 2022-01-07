@@ -79,7 +79,7 @@ let endMessage = document.getElementsByClassName('gameOver')
 
 /*----- event listeners -----*/
 dealButton.addEventListener('click', dealCards)
-playCard.addEventListener('click', compareCards)
+
 resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
@@ -98,6 +98,7 @@ function dealCards() {
         p2Hand.push(tempPlayingCards[d])
         tempPlayingCards.splice(d,1)
     }
+    playCard.addEventListener('click', compareCards)
 }
 
 function compareCards() {
@@ -167,8 +168,12 @@ function checkForWin () {
         winner = 'Player 2'
         console.log('Player 2 wins the war!')
         gameOver()
+    } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length === p1Pile.length) {
+        console.log('This is WAR! There are no real winners!')
+        console.log(p1Hand.length, p1Pile.length, p2Hand.length, p2Pile.length);
+        gameOver()
     }
-    console.log(p1Hand.length, p1Pile.length, p2Hand.length, p2Pile.length);
+    
 }
 
 function resetGame() {
