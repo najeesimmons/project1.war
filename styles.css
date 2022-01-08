@@ -74,6 +74,13 @@ body {
     border-radius: 5px;
 }
 
+.activeAllCards {
+    box-shadow: 
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 151px rgb(218, 76, 57);
+}
+
 .allButtons {
     position: relative;
     margin: 25px;
