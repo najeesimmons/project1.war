@@ -77,28 +77,33 @@ let p2CardMarker = document.querySelector('#p2Card p')
 
 let gameBoard = document.getElementsByClassName('gameBoard')
 
+
 // let backOfCard = document.createElement('img')
 // backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
 // backOfCard.classList.add('cardBack')
 
+let backOfCard = document.createElement('img')
+backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
+backOfCard.classList.add('...')
+
 let backOfCard2 = document.createElement('img')
 backOfCard2.src = 'https://i.imgur.com/38pBbZN.png'
 backOfCard2.classList.add('cardBack2')
+// at present only backOfCard 1 is called due to positioning problems 
 
 /*----- cached element references -----*/
 
 /*----- event listeners -----*/
 dealButton.addEventListener('click', dealCards)
-
 resetButton.addEventListener('click', resetGame)
-
 
 /*----- functions -----*/
 
+document.querySelector('.messenger').innerText=`Ready for War?`
 
 function dealCards() {
+    
     tempPlayingCards = playingCards
-    // console.log(tempPlayingCards, playingCards)
     while (p1Hand.length < 26) {
         let c = Math.floor(Math.random()* tempPlayingCards.length)
         p1Hand.push(tempPlayingCards[c])
@@ -111,6 +116,7 @@ function dealCards() {
     }
     playCard.addEventListener('click', compareCards)
     dealButton.removeEventListener('click',dealCards)
+    document.querySelector('.messenger').innerText=`Make your move!`
     // gameBoard.classList.add("activeGameBoard")
     // js seems not to recognize this class, though it's in CSS
 }
@@ -120,11 +126,16 @@ function compareCards() {
     if (p1Card.value > p2Card.value) {
         p1Pile.push(p1Card)
         p1Pile.push(p2Card)
-        console.log("Player 1 took this round!");
+        console.log('You took this round!');
+        // document.querySelector('.messenger').innerText=`You took this round!`
+        // the above is only displayed for a millisecond before next function is called
+        
     } else if (p2Card.value > p1Card.value) {
         p2Pile.push(p1Card)
         p2Pile.push(p2Card)
-        console.log("Player 2 took this round!");
+        console.log("The enemy took this round!");
+        // document.querySelector('.messenger').innerText=`You took this round!`
+        // the above is only displayed for a millisecond before next function is called
     } else {
         goToWar()
     } 
@@ -162,7 +173,9 @@ function pickCards() {
     p2CardMarker.classList.remove('placeHolderText')
     p2CardMarker.classList.add('cardValue')
     // document.querySelector('.divContainer').appendChild(backOfCard)
+    // back of card currenly not called due to positioning problems
     document.querySelector('.divContainer').appendChild(backOfCard2)
+    
 }
 
 function goToWar() {
@@ -173,28 +186,36 @@ function goToWar() {
         p1Pile.push(p1Card)
         p1Pile.push(p2Card)
         console.log(p1Pile, p2Pile)
+        document.querySelector('.messenger').innerText=`You won the stalemate!`
     } else {
         console.log('This one goes to player 2!')
         p2Pile.push(p1Card)
         p2Pile.push(p2Card)
+        document.querySelector('.messenger').innerText=`Your enemy won the stalemate!`
     }
 }
 
 function checkForWin () {
     if (p1Hand.length === 0 && p2Hand.length === 0 && p1Pile.length > p2Pile.length) {
         winner = 'Player 1'
-        console.log('Player 1 wins the war!')
+        console.log('You won the the WAR!')
+        // document.querySelector('.messenger').innerText=`You won the the WAR!`
+        // this is only dipslaying for a split second before the next message is triggered
         gameOver()
     } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length > p1Pile.length) {
         winner = 'Player 2'
-        console.log('Player 2 wins the war!')
+        console.log('Your enemy won the WAR!')
+        // document.querySelector('.messenger').innerText=`Your enemy won the WAR!`
+        // this is only dipslaying for a split second before the next message is triggered
         gameOver()
     } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length === p1Pile.length) {
         console.log('Sometimes in war...nobody wins.')
+        // document.querySelector('.messenger').innerText='Sometimes in war...nobody wins.'
+        // this is only dipslaying for a split second before the next message is triggered
         console.log(p1Hand.length, p1Pile.length, p2Hand.length, p2Pile.length);
         gameOver()
     }
-    
+    document.querySelector('.messenger').innerText=`Player: ${p1Pile.length} || Enemy: ${p2Pile.length}`
 }
 
 function resetGame() {
