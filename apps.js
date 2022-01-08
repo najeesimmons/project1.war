@@ -75,6 +75,8 @@ let endMessage = document.getElementsByClassName('gameOver')
 let p1CardMarker = document.querySelector('#p1Card p')
 let p2CardMarker = document.querySelector('#p2Card p')
 
+let gameBoard = document.getElementsByClassName('gameBoard')
+
 // let backOfCard = document.createElement('img')
 // backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
 // backOfCard.classList.add('cardBack')
@@ -90,12 +92,13 @@ dealButton.addEventListener('click', dealCards)
 
 resetButton.addEventListener('click', resetGame)
 
+
 /*----- functions -----*/
 
 
 function dealCards() {
     tempPlayingCards = playingCards
-    console.log(tempPlayingCards, playingCards)
+    // console.log(tempPlayingCards, playingCards)
     while (p1Hand.length < 26) {
         let c = Math.floor(Math.random()* tempPlayingCards.length)
         p1Hand.push(tempPlayingCards[c])
@@ -108,6 +111,8 @@ function dealCards() {
     }
     playCard.addEventListener('click', compareCards)
     dealButton.removeEventListener('click',dealCards)
+    // gameBoard.classList.add("activeGameBoard")
+    // js seems not to recognize this class, though it's in CSS
 }
 
 function compareCards() {
@@ -123,7 +128,6 @@ function compareCards() {
     } else {
         goToWar()
     } 
-        //add cardbank (which is a class) to div 
         checkForWin()
         
         
@@ -147,7 +151,7 @@ function pickCards() {
     p2Card = p2Hand[0]
     p2Hand.splice(0,1)
     console.log(p1Hand, p1Card)
-    if (p1Card&& p1Card.suit && p1Card.value) {
+    if (p1Card && p1Card.suit && p1Card.value) {
         document.querySelector('#p1Card p').innerText=`${renderSymbol(p1Card.suit)} ${p1Card.value}`
     } 
     if (p2Card&& p2Card.suit && p2Card.value) {
@@ -161,7 +165,6 @@ function pickCards() {
     document.querySelector('.divContainer').appendChild(backOfCard2)
 }
 
-// beginning of stretch version of goToWar below
 function goToWar() {
     console.log('This is war baby!')
     let x = Math.floor(Math.random() * players.length)
@@ -207,6 +210,7 @@ function resetGame() {
     winner = ''
     tempPlayingCards = []
 
+    dealButton.addEventListener('click', dealCards)
     playCard.addEventListener('click', compareCards)
 }
 
