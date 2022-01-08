@@ -10,11 +10,16 @@ h1 {
     font-size: 50px;
 }
 
-.backgroundPicHolder {
+body {
+    background-image: url('https://worldview.stratfor.com/sites/default/files/styles/2x1_full/public/naval-update-map-12302020%20%281%29.png?itok=aNr0zTRM');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/* .backgroundPicHolder {
     background-image: url('https://worldview.stratfor.com/sites/default/files/styles/2x1_full/public/naval-update-map-12302020%20%281%29.png?itok=aNr0zTRM');
     background-size: cover;
     background-color: black;
-}
+} */
 
 .gameBoard {
     margin: 0 auto;
