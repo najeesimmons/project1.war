@@ -127,8 +127,8 @@ function compareCards() {
         p1Pile.push(p1Card)
         p1Pile.push(p2Card)
         console.log('You took this round!');
-        document.querySelector('#p1Card').classList.add('activeAllCards')
-        document.querySelector('#p2Card').classList.remove('activeAllCards')
+        document.querySelector('#p1Card').classList.add('activeGameCard')
+        document.querySelector('#p2Card').classList.remove('activeGameCard')
         // document.querySelector('.messenger').innerText=`You took this round!`
         // the above is only displayed for a millisecond before next function is called
         
@@ -136,8 +136,8 @@ function compareCards() {
         p2Pile.push(p1Card)
         p2Pile.push(p2Card)
         console.log("Your enemy took this round!");
-        document.querySelector('#p2Card').classList.add('activeAllCards')
-        document.querySelector('#p1Card').classList.remove('activeAllCards')
+        document.querySelector('#p2Card').classList.add('activeGameCard')
+        document.querySelector('#p1Card').classList.remove('activeGameCard')
         // document.querySelector('.messenger').innerText=`You took this round!`
         // the above is only displayed for a millisecond before next function is called
     } else {
