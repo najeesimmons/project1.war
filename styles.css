@@ -76,8 +76,8 @@ body {
 
 .activeAllCards {
     box-shadow: 
-        0 0 7px #fff,
-        0 0 10px #fff,
+        0 0 100px rgb(173, 66, 66),
+        0 0 10px rgb(161, 42, 42),
         0 0 151px rgb(218, 76, 57);
 }
 
