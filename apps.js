@@ -75,9 +75,6 @@ let endMessage = document.getElementsByClassName('gameOver')
 let p1CardMarker = document.querySelector('#p1Card p')
 let p2CardMarker = document.querySelector('#p2Card p')
 
-let gameBoard = document.getElementsByClassName('gameBoard')
-
-
 // let backOfCard = document.createElement('img')
 // backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
 // backOfCard.classList.add('cardBack')
@@ -98,11 +95,12 @@ dealButton.addEventListener('click', dealCards)
 resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
-
+document.querySelector('#deal').classList.add('activeGameBoard')
 document.querySelector('.messenger').innerText=`Ready for War?`
 
+
 function dealCards() {
-    
+    document.querySelector('.gameBoard').classList.add('activeGameBoard')
     tempPlayingCards = playingCards
     while (p1Hand.length < 26) {
         let c = Math.floor(Math.random()* tempPlayingCards.length)
@@ -117,6 +115,8 @@ function dealCards() {
     playCard.addEventListener('click', compareCards)
     dealButton.removeEventListener('click',dealCards)
     document.querySelector('.messenger').innerText=`Make your move!`
+    document.querySelector('#deal').classList.remove('activeGameBoard')
+    document.querySelector('#playCard').classList.add('activeGameBoard')
     // gameBoard.classList.add("activeGameBoard")
     // js seems not to recognize this class, though it's in CSS
 }
@@ -201,22 +201,22 @@ function goToWar() {
 
 function checkForWin () {
     if (p1Hand.length === 0 && p2Hand.length === 0 && p1Pile.length > p2Pile.length) {
-        winner = 'Player 1'
+        winner = 1
         console.log('You won the the WAR!')
         // document.querySelector('.messenger').innerText=`You won the the WAR!`
         // this is only dipslaying for a split second before the next message is triggered
         gameOver()
     } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length > p1Pile.length) {
-        winner = 'Player 2'
+        winner = 2
         console.log('Your enemy won the WAR!')
         // document.querySelector('.messenger').innerText=`Your enemy won the WAR!`
         // this is only dipslaying for a split second before the next message is triggered
         gameOver()
     } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length === p1Pile.length) {
+        winner = 3
         console.log('Sometimes in war...nobody wins.')
         // document.querySelector('.messenger').innerText='Sometimes in war...nobody wins.'
         // this is only dipslaying for a split second before the next message is triggered
-        console.log(p1Hand.length, p1Pile.length, p2Hand.length, p2Pile.length);
         gameOver()
     }
     document.querySelector('.messenger').innerText=`Player: ${p1Pile.length} || Enemy: ${p2Pile.length}`
@@ -240,7 +240,17 @@ function resetGame() {
 }
 
 function gameOver() {
+    if (winner === 1) {
+        document.querySelector('.messenger').innerText=`You won the war!`
+    } else if (winner === 2) {
+        document.querySelector('.messenger').innerText=`Your enemy won the war!`
+    } else if (winner === 3) {
+        document.querySelector('.messenger').innerText=`Sometimes in war, nobody wins!`
+    }
     playCard.removeEventListener('click', compareCards)
+    document.querySelector('#playCard').classList.remove('activeGameBoard')
+    document.querySelector('#resetGame').classList.add('activeGameBoard')
+    // logic displaying winner at the end is not yet functional
 }
 
 // ****************************************************************************************************
