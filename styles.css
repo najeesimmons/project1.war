@@ -115,15 +115,30 @@ body {
     width: 330px;
 } */
 
+.cardBack {
+    position: absolute;
+    margin: 0;
+    top: 37%;
+    left: 50%;
+    height: 330px;
+    width: 330px;
+}
 .cardBack2 {
-    position: relative;
+    position: absolute;
+    margin: 0;
+    top: 66.5%;
+    left: 42.75%;
+    height: 330px;
+    width: 330px;
+}
+
+/* .cardBack2 {
+    position: absolute;
     top: 49.5%;
     left: 50%;
     margin-top: -465px;
     margin-left: -220px;
     height: 330px;
     width: 330px;
-}
-
-
+} */
 
