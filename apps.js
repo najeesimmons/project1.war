@@ -1,5 +1,6 @@
 /*----- constants -----*/
 /*----- app's state (variables) -----*/
+
 let playingCards = [
     {suit: "hearts", value: 2},
     {suit: "hearts", value: 3},
@@ -140,9 +141,7 @@ function compareCards() {
     } else {
         goToWar()
     } 
-        checkForWin()
-        
-        
+        checkForWin()     
 }
 
 function renderSymbol(suit) {
@@ -176,8 +175,7 @@ function pickCards() {
     // document.querySelector('.divContainer').appendChild(backOfCard)
     // back of card currenly not called due to positioning problems
     document.querySelector('.gameBoard').appendChild(backOfCard)
-    document.querySelector('.gameBoard').appendChild(backOfCard2)
-    
+    document.querySelector('.gameBoard').appendChild(backOfCard2)  
 }
 
 function goToWar() {
@@ -199,19 +197,19 @@ function goToWar() {
 
 function checkForWin () {
     if (p1Hand.length === 0 && p2Hand.length === 0 && p1Pile.length > p2Pile.length) {
-        winner = 1
+        winner = 'You'
         console.log('You won the the WAR!')
         // document.querySelector('.messenger').innerText=`You won the the WAR!`
         // this is only dipslaying for a split second before the next message is triggered
         gameOver()
     } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length > p1Pile.length) {
-        winner = 2
+        winner = 'Your Enemy'
         console.log('Your enemy won the WAR!')
         // document.querySelector('.messenger').innerText=`Your enemy won the WAR!`
         // this is only dipslaying for a split second before the next message is triggered
         gameOver()
     } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length === p1Pile.length) {
-        winner = 3
+        winner = 'Tie'
         console.log('Sometimes in war...nobody wins.')
         // document.querySelector('.messenger').innerText='Sometimes in war...nobody wins.'
         // this is only dipslaying for a split second before the next message is triggered
@@ -238,17 +236,18 @@ function resetGame() {
 }
 
 function gameOver() {
-    if (winner === 1) {
+    console.log(winner)
+    if (winner === 'You') {
         document.querySelector('.messenger').innerText=`You won the war!`
-    } else if (winner === 2) {
+    } else if (winner === 'Your Enemy') {
         document.querySelector('.messenger').innerText=`Your enemy won the war!`
-    } else if (winner === 3) {
+    } else if (winner === 'Tie') {
         document.querySelector('.messenger').innerText=`Sometimes in war, nobody wins!`
     }
     playCard.removeEventListener('click', compareCards)
     document.querySelector('#playCard').classList.remove('activeGameBoard')
     document.querySelector('#resetGame').classList.add('activeGameBoard')
-    // logic displaying winner at the end is not yet functional
+    // logic displaying winner at the end is not yet functional, I don't know why
 }
 
 // ****************************************************************************************************
