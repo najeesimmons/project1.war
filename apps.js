@@ -1,6 +1,6 @@
 /*----- constants -----*/
 /*----- app's state (variables) -----*/
-
+// deck
 let playingCards = [
     {suit: "hearts", value: 2},
     {suit: "hearts", value: 3},
@@ -56,6 +56,7 @@ let playingCards = [
     {suit: "spades", value: 14},
 ]
 
+// gameplay values
 let tempPlayingCards = [];
 let p1Hand = [];
 let p1Pile = [];
@@ -68,14 +69,17 @@ let players = ['player 1', 'player 2']
 
 let warCards = [];
 let winner = ''
+
+let p1CardMarker = document.querySelector('#p1Card p')
+let p2CardMarker = document.querySelector('#p2Card p')
+
+// buttons
 let dealButton = document.getElementById('deal')
 let playCard = document.getElementById('playCard')
 let resetButton = document.getElementById('resetGame')
 let endMessage = document.getElementsByClassName('gameOver')
 
-let p1CardMarker = document.querySelector('#p1Card p')
-let p2CardMarker = document.querySelector('#p2Card p')
-//
+// military symbols 
 let marinesSymbol = document.createElement('img')
 marinesSymbol.src = 'https://i.imgur.com/tz4iOz6.png'
 marinesSymbol.classList.add('marinesSymbol')
@@ -91,8 +95,8 @@ airForceSymbol.classList.add('airForceSymbol')
 let navySymbol = document.createElement('img')
 navySymbol.src = 'https://i.imgur.com/dkwNhga.png'
 navySymbol.classList.add('navySymbol')
-//
 
+//  playing card designs
 let backOfCard = document.createElement('img')
 backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
 backOfCard.classList.add('cardBack')
@@ -105,8 +109,15 @@ let navBarLinks = document.querySelectorAll('li')
 
 /*----- cached element references -----*/
 
+// sounds 
+
+// var dealAlert = new Audio(src="https://audio.jukehost.co.uk/gYeF9bf2dRkIyWsUGE1ISH1FjJMilWUs");
+// this sound won't play
+
 /*----- event listeners -----*/
 dealButton.addEventListener('click', dealCards)
+// dealAlert.addEventListener('click', dealAlert.play)
+// this sound won't play
 resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
