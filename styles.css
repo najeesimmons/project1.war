@@ -25,13 +25,14 @@ h1 {
     display: inline;
     padding: 8px;
     border-right: 1px solid #bbb;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .aboutCreator {
     float: right;
     padding: 8px;
     line-height: 5px;
+    border-right: none;
 }
 .activeNavBar{
         background-color: black;

@@ -101,6 +101,8 @@ let backOfCard2 = document.createElement('img')
 backOfCard2.src = 'https://i.imgur.com/38pBbZN.png'
 backOfCard2.classList.add('cardBack2')
 
+let navBarLinks = document.querySelectorAll('li')
+
 /*----- cached element references -----*/
 
 /*----- event listeners -----*/
