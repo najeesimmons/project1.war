@@ -3,7 +3,7 @@ h1 {
     background-color: black;
     text-align: center;
     text-shadow: 1px 1px 2px rgb(66, 150, 204), 0 0 25px rgb(66, 150, 204), 0 0 5px rgb(66, 150, 204);
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -36,6 +36,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-color: gray;
+    margin: 0;
     /* background color included in case image is not found by browser, gray will display instead */
 }
 
@@ -65,7 +66,8 @@ body {
     box-shadow: 
         0 0 100px rgb(202, 120, 12),
         0 0 10px rgb(184, 102, 10),
-        0 0 151px rgb(172, 115, 9);
+        0 0 151px rgb(172, 115, 9),
+        0 0 150px rgb(202, 120, 12);
 }
 
 .divContainer {
@@ -122,4 +124,10 @@ body {
     left: 18.25%;
     height: 330px;
     width: 330px;
+}
+
+.audioPlayer {
+    position: absolute;
+    left: 25px;
+    width: 15%; 
 }

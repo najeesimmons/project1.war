@@ -84,7 +84,6 @@ backOfCard.classList.add('cardBack')
 let backOfCard2 = document.createElement('img')
 backOfCard2.src = 'https://i.imgur.com/38pBbZN.png'
 backOfCard2.classList.add('cardBack2')
-// at present only backOfCard 1 is called due to positioning problems 
 
 /*----- cached element references -----*/
 
@@ -172,8 +171,6 @@ function pickCards() {
     p1CardMarker.classList.add('cardValue')
     p2CardMarker.classList.remove('placeHolderText')
     p2CardMarker.classList.add('cardValue')
-    // document.querySelector('.divContainer').appendChild(backOfCard)
-    // back of card currenly not called due to positioning problems
     document.querySelector('.gameBoard').appendChild(backOfCard)
     document.querySelector('.gameBoard').appendChild(backOfCard2)  
 }
