@@ -252,6 +252,7 @@ function checkForWin () {
 }
 
 function resetGame() {
+
     p1Hand = [];
     p1Pile = [];
     p1Card = {};
