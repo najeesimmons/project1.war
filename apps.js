@@ -75,7 +75,23 @@ let endMessage = document.getElementsByClassName('gameOver')
 
 let p1CardMarker = document.querySelector('#p1Card p')
 let p2CardMarker = document.querySelector('#p2Card p')
+//
+let marinesSymbol = document.createElement('img')
+marinesSymbol.src = 'https://i.imgur.com/tz4iOz6.png'
+marinesSymbol.classList.add('marinesSymbol')
 
+let armySymbol = document.createElement('img')
+armySymbol.src = 'https://i.imgur.com/ZMpazCl.png'
+armySymbol.classList.add('armySymbol')
+
+let airForceSymbol = document.createElement('img')
+airForceSymbol.src = 'https://i.imgur.com/1ejw5bf.png'
+airForceSymbol.classList.add('airForceSymbol')
+
+let navySymbol = document.createElement('img')
+navySymbol.src = 'https://i.imgur.com/dkwNhga.png'
+navySymbol.classList.add('navySymbol')
+//
 
 let backOfCard = document.createElement('img')
 backOfCard.src = 'https://i.imgur.com/38pBbZN.png'
@@ -94,6 +110,12 @@ resetButton.addEventListener('click', resetGame)
 /*----- functions -----*/
 document.querySelector('#deal').classList.add('activeGameBoard')
 document.querySelector('.messenger').innerText=`Ready for War?`
+
+document.querySelector('#p2Pile').appendChild(marinesSymbol)
+document.querySelector('#p1Pile').appendChild(airForceSymbol)
+document.querySelector('#p1Card').appendChild(armySymbol)
+document.querySelector('#p2Card').appendChild(navySymbol)
+
 
 
 function dealCards() {
