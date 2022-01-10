@@ -108,7 +108,7 @@ dealButton.addEventListener('click', dealCards)
 resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
-document.querySelector('#deal').classList.add('activeGameBoard')
+document.querySelector('#deal').classList.add('activeButton')
 document.querySelector('.messenger').innerText=`Ready for War?`
 
 document.querySelector('#p2Pile').appendChild(marinesSymbol)
@@ -117,9 +117,12 @@ document.querySelector('#p1Card').appendChild(armySymbol)
 document.querySelector('#p2Card').appendChild(navySymbol)
 
 
-
 function dealCards() {
     document.querySelector('.gameBoard').classList.add('activeGameBoard')
+    document.querySelector('#p2Pile').removeChild(marinesSymbol)
+    document.querySelector('#p1Pile').removeChild(airForceSymbol)
+    document.querySelector('#p1Card').removeChild(armySymbol)
+    document.querySelector('#p2Card').removeChild(navySymbol)
     tempPlayingCards = playingCards
     while (p1Hand.length < 26) {
         let c = Math.floor(Math.random()* tempPlayingCards.length)
@@ -134,10 +137,8 @@ function dealCards() {
     playCard.addEventListener('click', compareCards)
     dealButton.removeEventListener('click',dealCards)
     document.querySelector('.messenger').innerText=`Make your move!`
-    document.querySelector('#deal').classList.remove('activeGameBoard')
-    document.querySelector('#playCard').classList.add('activeGameBoard')
-    // gameBoard.classList.add("activeGameBoard")
-    // js seems not to recognize this class, though it's in CSS
+    document.querySelector('#deal').classList.remove('activeButton')
+    document.querySelector('#playCard').classList.add('activeButton')
 }
 
 function compareCards() {
@@ -264,8 +265,9 @@ function gameOver() {
         document.querySelector('.messenger').innerText=`Sometimes in war, nobody wins!`
     }
     playCard.removeEventListener('click', compareCards)
-    document.querySelector('#playCard').classList.remove('activeGameBoard')
+    document.querySelector('#playCard').classList.remove('activeButton')
     document.querySelector('#resetGame').classList.add('activeGameBoard')
+    document.querySelector('.gameBoard').classList.remove('activeGameBoard')
     // logic displaying winner at the end is not yet functional, I don't know why
 }
 

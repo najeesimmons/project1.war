@@ -4,12 +4,38 @@ h1 {
     text-align: center;
     text-shadow: 1px 1px 2px rgb(66, 150, 204), 0 0 25px rgb(66, 150, 204), 0 0 5px rgb(66, 150, 204);
     margin-top: 30px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    margin-bottom: 0px;
     padding-top: 10px;
     padding-bottom: 10px;
     /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ; */
     font-size: 60px;
     font-family: 'Orbitron', sans-serif;
+}
+
+.navBar {
+        list-style-type: none;
+        margin: 0px;
+        padding: 5px;
+        background-color: rgb(203, 223, 224);
+        font-family: 'Orbitron', sans-serif;
+}
+
+.navBarLinks {
+    display: inline;
+    padding: 8px;
+    border-right: 1px solid #bbb;
+    font-weight: 600;
+}
+
+.aboutCreator {
+    float: right;
+    padding: 8px;
+    line-height: 5px;
+}
+.activeNavBar{
+        background-color: black;
+        color: white;
 }
 
 .messenger {
@@ -141,6 +167,15 @@ body {
     border-color: white;
     border-width: 5px;
 }
+
+.activeButton {
+    box-shadow: 
+        00 0 100px rgb(202, 120, 12),
+        00 0 100px rgb(184, 102, 10),
+        00 0 101px rgb(172, 115, 9),
+        00 0 150px rgb(202, 120, 12);
+}
+
 .cardValue {
     font-size: 30px;
     text-align: center;
