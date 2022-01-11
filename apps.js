@@ -22,15 +22,12 @@ function buildDeck() {
                 let card = {
                     value: value[i], suit: suit[j], score: score
                 };
-                console.log(card)
                 deck.push(card);
             }
         }
     }
 
 buildDeck()
-
-
 
 let playerHand = [];
 let playerPile = [];
@@ -109,6 +106,7 @@ function dealCards() {
     document.querySelector('#playerPile').removeChild(airForceSymbol)
     document.querySelector('#playerCard').removeChild(armySymbol)
     document.querySelector('#computerCard').removeChild(navySymbol)
+
     while (playerHand.length < 26) {
         let c = Math.floor(Math.random()* deck.length)
         playerHand.push(deck[c])
@@ -119,12 +117,15 @@ function dealCards() {
         computerHand.push(deck[d])
         deck.splice(d,1)
     }
-    playCard.addEventListener('click', compareCards)
+    playCard.addEventListener('click', playRound)
     dealButton.removeEventListener('click',dealCards)
     document.querySelector('.messenger').innerText=`Make your move!`
     document.querySelector('#deal').classList.remove('activeButton')
     document.querySelector('#playCard').classList.add('activeButton')
 }
+
+// renderSymbols is no longer a part of the code, I need to write code to display card info in the <p> of
+// player and computer hand on 135/136 as well as 138/139
 
 function pickCards() {
     playerCard = playerHand[0]
@@ -145,7 +146,7 @@ function pickCards() {
     document.querySelector('.gameBoard').appendChild(backOfCard)
     document.querySelector('.gameBoard').appendChild(backOfCard2)  
 }
-function compareCards() {
+function playRound() {
     pickCards()
     if (playerCard.value > computerCard.value) {
         playerPile.push(playerCard)
@@ -218,7 +219,7 @@ function resetGame() {
     deck = []
 
     dealButton.addEventListener('click', dealCards)
-    playCard.addEventListener('click', compareCards)
+    playCard.addEventListener('click', playRound)
 }
 
 function gameOver() {
@@ -230,7 +231,7 @@ function gameOver() {
     } else if (winner === 'Tie') {
         document.querySelector('.messenger').innerText=`Sometimes in war, nobody wins!`
     }
-    playCard.removeEventListener('click', compareCards)
+    playCard.removeEventListener('click', playRound)
     document.querySelector('#playCard').classList.remove('activeButton')
     document.querySelector('#resetGame').classList.add('activeGameBoard')
     document.querySelector('.gameBoard').classList.remove('activeGameBoard')
