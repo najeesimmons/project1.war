@@ -1,51 +1,55 @@
 /*----- constants -----*/
 /*----- app's state (variables) -----*/
 // deck
+
 let suit = ['♤','♧','♥','♦'];
 let value = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
 let deck = [];
 
 function buildDeck() {
-    for (let i = 0; i < suit.length; i++) {
-        for (let j = 0; j < value.length; j++) {
+    for (let i = 0; i < value.length; i++) {
+        for (let j = 0; j < suit.length; j++) {
             let score = parseInt(value[i]);
-            if (value[i] === 'J') {
-                score = 11;
-            } else if (value[i] === 'Q') {
-                score = 12;
-            } else if (value[i] === 'K') {
-                score = 13;
-            } else if (value[i] === 'A') {
-                score = 14;
+            // if (value[i] == 'J')
+            //     score = 11;
+            // if (value[i] == 'Q')
+            //     score = 12;
+            // if (value[i] == 'K') 
+            //     score = 13;
+            // if (value[i] == 'A') 
+            //     score = 14;
                 let card = {
-                    value: value[i], suit: suit[i], score : score
+                    value: value[i], suit: suit[j], score: score
                 };
+                console.log(card)
                 deck.push(card);
             }
         }
     }
-}
+    // for buildDeck function, when if statements are commented in, only
+    // four 'cards' are created and pushed to the deck, all w/ value of
+    // J
 
 buildDeck()
+console.log(deck)
 //buildDeck is NOT pushing cards to 'deck' variable, console logs out empty array.
 
+let playerHand = [];
+let playerPile = [];
+let playerCard = {};
 
-let deck = [];
-let p1Hand = [];
-let p1Pile = [];
-let p1Card = {};
+let computerHand = [];
+let computerPile = [];
+let computerCard = {};
 
-let p2Hand = [];
-let p2Pile = [];
-let p2Card = {};
 let players = ['player 1', 'player 2']
-
-let warCards = [];
 let winner = ''
 
-let p1CardMarker = document.querySelector('#p1Card p')
-let p2CardMarker = document.querySelector('#p2Card p')
+let warCards = [];
+
+let playerCardMarker = document.querySelector('#playerCard p')
+let computerCardMarker = document.querySelector('#computerCard p')
 
 // buttons
 let dealButton = document.getElementById('deal')
@@ -53,7 +57,7 @@ let playCard = document.getElementById('playCard')
 let resetButton = document.getElementById('resetGame')
 let endMessage = document.getElementsByClassName('gameOver')
 
-// military symbols 
+// military symbol images
 let marinesSymbol = document.createElement('img')
 marinesSymbol.src = 'https://i.imgur.com/tz4iOz6.png'
 marinesSymbol.classList.add('marinesSymbol')
@@ -90,34 +94,32 @@ let navBarLinks = document.querySelectorAll('li')
 
 /*----- event listeners -----*/
 dealButton.addEventListener('click', dealCards)
-// dealAlert.addEventListener('click', dealAlert.play)
-// this sound won't play
 resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
 document.querySelector('#deal').classList.add('activeButton')
 document.querySelector('.messenger').innerText=`Ready for War?`
 
-document.querySelector('#p2Pile').appendChild(marinesSymbol)
-document.querySelector('#p1Pile').appendChild(airForceSymbol)
-document.querySelector('#p1Card').appendChild(armySymbol)
-document.querySelector('#p2Card').appendChild(navySymbol)
+document.querySelector('#computerPile').appendChild(marinesSymbol)
+document.querySelector('#playerPile').appendChild(airForceSymbol)
+document.querySelector('#playerCard').appendChild(armySymbol)
+document.querySelector('#computerCard').appendChild(navySymbol)
 
 
 function dealCards() {
     document.querySelector('.gameBoard').classList.add('activeGameBoard')
-    document.querySelector('#p2Pile').removeChild(marinesSymbol)
-    document.querySelector('#p1Pile').removeChild(airForceSymbol)
-    document.querySelector('#p1Card').removeChild(armySymbol)
-    document.querySelector('#p2Card').removeChild(navySymbol)
-    while (p1Hand.length < 26) {
+    document.querySelector('#computerPile').removeChild(marinesSymbol)
+    document.querySelector('#playerPile').removeChild(airForceSymbol)
+    document.querySelector('#playerCard').removeChild(armySymbol)
+    document.querySelector('#computerCard').removeChild(navySymbol)
+    while (playerHand.length < 26) {
         let c = Math.floor(Math.random()* deck.length)
-        p1Hand.push(deck[c])
+        playerHand.push(deck[c])
         deck.splice(c,1)
     } 
-    while (p2Hand.length < 26) {
+    while (computerHand.length < 26) {
         let d = Math.floor(Math.random()* deck.length)
-        p2Hand.push(deck[d])
+        computerHand.push(deck[d])
         deck.splice(d,1)
     }
     playCard.addEventListener('click', compareCards)
@@ -127,61 +129,44 @@ function dealCards() {
     document.querySelector('#playCard').classList.add('activeButton')
 }
 
+function pickCards() {
+    playerCard = playerHand[0]
+    playerHand.splice(0,1)
+    computerCard = computerHand[0]
+    computerHand.splice(0,1)
+    console.log(playerHand, playerCard)
+    if (playerCard && playerCard.suit && playerCard.value) {
+        document.querySelector('#playerCard p').innerText=`${renderSymbol(playerCard.suit)} ${playerCard.value}`
+    } 
+    if (computerCard&& computerCard.suit && computerCard.value) {
+        document.querySelector('#computerCard p').innerText=`${renderSymbol(computerCard.suit)} ${computerCard.value}`
+    }
+    playerCardMarker.classList.remove('placeHolderText')
+    playerCardMarker.classList.add('cardValue')
+    computerCardMarker.classList.remove('placeHolderText')
+    computerCardMarker.classList.add('cardValue')
+    document.querySelector('.gameBoard').appendChild(backOfCard)
+    document.querySelector('.gameBoard').appendChild(backOfCard2)  
+}
 function compareCards() {
     pickCards()
-    if (p1Card.value > p2Card.value) {
-        p1Pile.push(p1Card)
-        p1Pile.push(p2Card)
+    if (playerCard.value > computerCard.value) {
+        playerPile.push(playerCard)
+        playerPile.push(computerCard)
         console.log('You took this round!');
-        document.querySelector('#p1Card').classList.add('activeGameCard')
-        document.querySelector('#p2Card').classList.remove('activeGameCard')
-        // document.querySelector('.messenger').innerText=`You took this round!`
-        // the above is only displayed for a millisecond before next function is called
+        document.querySelector('#playerCard').classList.add('activeGameCard')
+        document.querySelector('#computerCard').classList.remove('activeGameCard')
         
-    } else if (p2Card.value > p1Card.value) {
-        p2Pile.push(p1Card)
-        p2Pile.push(p2Card)
+    } else if (computerCard.value > playerCard.value) {
+        computerPile.push(playerCard)
+        computerPile.push(computerCard)
         console.log("Your enemy took this round!");
-        document.querySelector('#p2Card').classList.add('activeGameCard')
-        document.querySelector('#p1Card').classList.remove('activeGameCard')
-        // document.querySelector('.messenger').innerText=`You took this round!`
-        // the above is only displayed for a millisecond before next function is called
+        document.querySelector('#computerCard').classList.add('activeGameCard')
+        document.querySelector('#playerCard').classList.remove('activeGameCard')
     } else {
         goToWar()
     } 
         checkForWin()     
-}
-
-function renderSymbol(suit) {
-    if (suit === 'hearts') {
-        return '♥'
-    } else if (suit === 'diamonds') {
-        return '♦'
-    } else if (suit === 'clubs') {
-        return '♣'
-    } else if (suit === 'spades') {
-        return '♠'
-    }
-}
-
-function pickCards() {
-    p1Card = p1Hand[0]
-    p1Hand.splice(0,1)
-    p2Card = p2Hand[0]
-    p2Hand.splice(0,1)
-    console.log(p1Hand, p1Card)
-    if (p1Card && p1Card.suit && p1Card.value) {
-        document.querySelector('#p1Card p').innerText=`${renderSymbol(p1Card.suit)} ${p1Card.value}`
-    } 
-    if (p2Card&& p2Card.suit && p2Card.value) {
-        document.querySelector('#p2Card p').innerText=`${renderSymbol(p2Card.suit)} ${p2Card.value}`
-    }
-    p1CardMarker.classList.remove('placeHolderText')
-    p1CardMarker.classList.add('cardValue')
-    p2CardMarker.classList.remove('placeHolderText')
-    p2CardMarker.classList.add('cardValue')
-    document.querySelector('.gameBoard').appendChild(backOfCard)
-    document.querySelector('.gameBoard').appendChild(backOfCard2)  
 }
 
 function goToWar() {
@@ -189,50 +174,47 @@ function goToWar() {
     let x = Math.floor(Math.random() * players.length)
     if (x === 1) {
         console.log('This one goes to player 1!')
-        p1Pile.push(p1Card)
-        p1Pile.push(p2Card)
-        console.log(p1Pile, p2Pile)
+        playerPile.push(playerCard)
+        playerPile.push(computerCard)
+        console.log(playerPile, computerPile)
         document.querySelector('.messenger').innerText=`You won the stalemate!`
     } else {
         console.log('This one goes to player 2!')
-        p2Pile.push(p1Card)
-        p2Pile.push(p2Card)
+        computerPile.push(playerCard)
+        computerPile.push(computerCard)
         document.querySelector('.messenger').innerText=`Your enemy won the stalemate!`
     }
 }
 
 function checkForWin () {
-    if (p1Hand.length === 0 && p2Hand.length === 0 && p1Pile.length > p2Pile.length) {
+    if (playerHand.length === 0 && computerHand.length === 0 && playerPile.length > computerPile.length) {
         winner = 'You'
         console.log('You won the the WAR!')
         // document.querySelector('.messenger').innerText=`You won the the WAR!`
-        // this is only dipslaying for a split second before the next message is triggered
         gameOver()
-    } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length > p1Pile.length) {
+    } else if (playerHand.length === 0 && computerHand.length === 0 && computerPile.length > playerPile.length) {
         winner = 'Your Enemy'
         console.log('Your enemy won the WAR!')
         // document.querySelector('.messenger').innerText=`Your enemy won the WAR!`
-        // this is only dipslaying for a split second before the next message is triggered
         gameOver()
-    } else if (p1Hand.length === 0 && p2Hand.length === 0 && p2Pile.length === p1Pile.length) {
+    } else if (playerHand.length === 0 && computerHand.length === 0 && computerPile.length === playerPile.length) {
         winner = 'Tie'
         console.log('Sometimes in war...nobody wins.')
         // document.querySelector('.messenger').innerText='Sometimes in war...nobody wins.'
-        // this is only dipslaying for a split second before the next message is triggered
         gameOver()
     }
-    document.querySelector('.messenger').innerText=`Player: ${p1Pile.length} || Enemy: ${p2Pile.length}`
+    document.querySelector('.messenger').innerText=`Player: ${playerPile.length} || Enemy: ${computerPile.length}`
 }
 
 function resetGame() {
 
-    p1Hand = [];
-    p1Pile = [];
-    p1Card = {};
+    playerHand = [];
+    playerPile = [];
+    playerCard = {};
 
-    p2Hand = [];
-    p2Pile = [];
-    p2Card = {};
+    computerHand = [];
+    computerPile = [];
+    computerCard = {};
 
     warCards = [];
     winner = ''
@@ -286,10 +268,10 @@ function gameOver() {
 //     warCards.push(p2PlayedCard)
 //     console.log(warCards)
 //     for (let i = 0; i < 2; i++) {
-//         warCards.push(p1Hand[i])
-//         warCards.push(p2Hand[i])
-//         p1Hand.splice(0,i)
-//         p2Hand.splice(0,i)
+//         warCards.push(playerHand[i])
+//         warCards.push(computerHand[i])
+//         playerHand.splice(0,i)
+//         computerHand.splice(0,i)
 //         }
 //         console.log(warCards)
 //         pickCards()
@@ -297,13 +279,13 @@ function gameOver() {
 //         if (p1PlayedCard.value > p2PlayedCard.value) {
 //             warCards.push(p1PlayedCard)
 //             warCards.push(p2PlayedCard)
-//             p1Pile.push(warCards[0], warCards[1], warCards[2], warCards[3], warCards[4])
+//             playerPile.push(warCards[0], warCards[1], warCards[2], warCards[3], warCards[4])
 //             warCards.splice(0, warCards.length)
 //             console.log("Player 1 took the war!");
 //         } else if (p2PlayedCard.value > p1PlayedCard.value) {
 //             warCards.push(p1PlayedCard)
 //             warCards.push(p2PlayedCard)
-//             p2Pile.push(warCards[0], warCards[1], warCards[2], warCards[3], warCards[4])
+//             computerPile.push(warCards[0], warCards[1], warCards[2], warCards[3], warCards[4])
 //             warCards.splice(0, warCards.length)
 //             console.log("Player 1 took the war!");
 //     }
@@ -314,10 +296,10 @@ function gameOver() {
 // REFILL (Stretch Feature)
 
 // function refillHand() {
-//     if (p1Hand.length === 0 || p2Hand.length === 0) {
-//         p1Hand = p1Pile;
-//         p1Pile = []
-//         p2Hand = p2Pile;
-//         p2Pile = []
+//     if (playerHand.length === 0 || computerHand.length === 0) {
+//         playerHand = playerPile;
+//         playerPile = []
+//         computerHand = computerPile;
+//         computerPile = []
 //     } 
 // }
