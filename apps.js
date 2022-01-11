@@ -92,7 +92,7 @@ resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
 document.querySelector('#deal').classList.add('activeButton')
-document.querySelector('.messenger').innerText=`Ready for War?`
+document.querySelector('.messenger').innerText=``
 
 document.querySelector('#computerPile').appendChild(marinesSymbol)
 document.querySelector('#playerPile').appendChild(airForceSymbol)
@@ -154,13 +154,15 @@ function playRound() {
         console.log('You took this round!');
         document.querySelector('#playerCard').classList.add('activeGameCard')
         document.querySelector('#computerCard').classList.remove('activeGameCard')
-        
+        document.querySelector('.messenger').innerText=`You took this round!`
     } else if (computerCard.value > playerCard.value) {
         computerPile.push(playerCard)
         computerPile.push(computerCard)
         console.log("Your enemy took this round!");
         document.querySelector('#computerCard').classList.add('activeGameCard')
         document.querySelector('#playerCard').classList.remove('activeGameCard')
+        document.querySelector('.messenger').innerText=`Your Enemey took this round!`
+
     } else {
         goToWar()
     } 
@@ -175,12 +177,10 @@ function goToWar() {
         playerPile.push(playerCard)
         playerPile.push(computerCard)
         console.log(playerPile, computerPile)
-        document.querySelector('.messenger').innerText=`You won the stalemate!`
     } else {
         console.log('This one goes to player 2!')
         computerPile.push(playerCard)
         computerPile.push(computerCard)
-        document.querySelector('.messenger').innerText=`Your enemy won the stalemate!`
     }
 }
 
@@ -188,17 +188,14 @@ function checkForWin () {
     if (playerHand.length === 0 && computerHand.length === 0 && playerPile.length > computerPile.length) {
         winner = 'You'
         console.log('You won the the WAR!')
-        // document.querySelector('.messenger').innerText=`You won the the WAR!`
         gameOver()
     } else if (playerHand.length === 0 && computerHand.length === 0 && computerPile.length > playerPile.length) {
         winner = 'Your Enemy'
         console.log('Your enemy won the WAR!')
-        // document.querySelector('.messenger').innerText=`Your enemy won the WAR!`
         gameOver()
     } else if (playerHand.length === 0 && computerHand.length === 0 && computerPile.length === playerPile.length) {
         winner = 'Tie'
         console.log('Sometimes in war...nobody wins.')
-        // document.querySelector('.messenger').innerText='Sometimes in war...nobody wins.'
         gameOver()
     }
     document.querySelector('.messenger').innerText=`Player: ${playerPile.length} || Enemy: ${computerPile.length}`
