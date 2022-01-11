@@ -11,14 +11,14 @@ function buildDeck() {
     for (let i = 0; i < value.length; i++) {
         for (let j = 0; j < suit.length; j++) {
             let score = parseInt(value[i]);
-            // if (value[i] == 'J')
-            //     score = 11;
-            // if (value[i] == 'Q')
-            //     score = 12;
-            // if (value[i] == 'K') 
-            //     score = 13;
-            // if (value[i] == 'A') 
-            //     score = 14;
+            if (value[i] == 'J')
+                score = 11;
+            if (value[i] == 'Q')
+                score = 12;
+            if (value[i] == 'K') 
+                score = 13;
+            if (value[i] == 'A') 
+                score = 14;
                 let card = {
                     value: value[i], suit: suit[j], score: score
                 };
@@ -27,13 +27,10 @@ function buildDeck() {
             }
         }
     }
-    // for buildDeck function, when if statements are commented in, only
-    // four 'cards' are created and pushed to the deck, all w/ value of
-    // J
 
 buildDeck()
-console.log(deck)
-//buildDeck is NOT pushing cards to 'deck' variable, console logs out empty array.
+
+
 
 let playerHand = [];
 let playerPile = [];
