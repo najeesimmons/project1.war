@@ -58,11 +58,10 @@ h1 {
 }
 
 body {
-    /* background-image: url('https://worldview.stratfor.com/sites/default/files/styles/2x1_full/public/naval-update-map-12302020%20%281%29.png?itok=aNr0zTRM'); */
     background-image: url('https://external-preview.redd.it/qPBMW2EXx5XwLiKBnc1pQMGqehGgqJyBijRBeLarERU.jpg?auto=webp&s=b4fbd0d09cb3535bec8020e0c9c1f0ffcb383484');
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: gray;
+    background-color: rgb(58, 56, 56);
     margin: 0;
     /* background color included in case image is not found by browser, gray will display instead */
 }
