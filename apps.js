@@ -134,10 +134,10 @@ function pickCards() {
     computerHand.splice(0,1)
     console.log(playerHand, playerCard)
     if (playerCard && playerCard.suit && playerCard.value) {
-        document.querySelector('#playerCard p').innerText=`${renderSymbol(playerCard.suit)} ${playerCard.value}`
+        document.querySelector('#playerCard p').innerText=`${playerCard.suit} ${playerCard.value}`
     } 
     if (computerCard&& computerCard.suit && computerCard.value) {
-        document.querySelector('#computerCard p').innerText=`${renderSymbol(computerCard.suit)} ${computerCard.value}`
+        document.querySelector('#computerCard p').innerText=`${computerCard.suit} ${computerCard.value}`
     }
     playerCardMarker.classList.remove('placeHolderText')
     playerCardMarker.classList.add('cardValue')
