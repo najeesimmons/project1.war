@@ -92,7 +92,7 @@ resetButton.addEventListener('click', resetGame)
 
 /*----- functions -----*/
 document.querySelector('#deal').classList.add('activeButton')
-document.querySelector('.messenger').innerText=``
+document.querySelector('.messenger').innerText=`Ready for War`
 
 document.querySelector('#computerPile').appendChild(marinesSymbol)
 document.querySelector('#playerPile').appendChild(airForceSymbol)
@@ -232,6 +232,7 @@ function gameOver() {
     document.querySelector('#playCard').classList.remove('activeButton')
     document.querySelector('#resetGame').classList.add('activeGameBoard')
     document.querySelector('.gameBoard').classList.remove('activeGameBoard')
+    
     // logic displaying winner at the end is not yet functional, I don't know why
 }
 

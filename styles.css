@@ -55,12 +55,6 @@ h1 {
     position: relative;
     margin: 0 auto;
     top: 570px;
-    animation-name: testing;
-    animation-duration: 20s;;
-}
-@keyframes testing {
-    from {color: rgb(34, 168, 56);}
-    to {color: yellow;}
 }
 
 body {
